@@ -1,0 +1,47 @@
+h1, h2 {
+    text-align: center;
+}
+
+button {
+    padding: .5em 1.2em;
+    border-radius: 5px;
+    text-align: center;
+    vertical-align: center;
+    margin: auto auto 5em auto;
+    font-size: 14pt;
+    border: 0;
+    display: block;
+    color: #ffffff;
+}
+
+button:hover {
+    background: #fefefe !important;
+    color: #000000;
+}
+
+button.signup {
+    float: right;
+    background-color: dodgerblue;
+}
+
+button.login {
+    float: left;
+    background-color: mediumseagreen;
+}
+
+@media screen and (max-width: 980px) {
+    div.one-row > div {
+        overflow: hidden !important;
+        margin: auto !important;
+    }
+
+    button {
+        width: 80%;
+        margin: 3em;
+        float: none !important;
+    }
+
+    .about {
+        margin: auto !important;
+    }
+}
