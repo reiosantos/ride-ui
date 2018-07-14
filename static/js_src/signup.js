@@ -50,7 +50,7 @@ let signup = async (form) => {
 						&& response.hasOwnProperty("error_message")
 						&& response.hasOwnProperty("data")) {
 
-						error_panel.innerHTML = `${response.error_message} <br> ${response.data}`;
+						error_panel.innerHTML = `${response.error_message} <br> ${response.data ? response.data : ""}`;
 						error_panel.style.display = "block";
 					}else{
 						error_panel.innerHTML = "Unknown error. consult the administrator";
