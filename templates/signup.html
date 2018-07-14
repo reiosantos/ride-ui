@@ -28,7 +28,11 @@
         </div>
 
         <div class="col-8">
-            <form class="form-signin" method="get" id="form-sign-up" action="#" onsubmit="return submitForm(this)">
+
+            <span id="loginError"></span>
+            <span id="signupSuccess"></span>
+
+            <form class="form-signin" method="get" id="form-sign-up" action="" >
 
                 <label for="inputName" class="sm-only">Full Names</label>
                 <input type="text" name="inputName" id="inputName" class="form-control" placeholder="Name" required
@@ -68,7 +72,7 @@
         <p>&copy; RMW 2018</p>
     </footer>
 
-    <script type="text/javascript" src="../static/js/main.js"></script>
+    <script type="text/javascript" src="../static/js/main.bundle.js"></script>
 
 </div>
 </body>
