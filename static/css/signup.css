@@ -68,3 +68,16 @@
     font-size: inherit;
     background-color: rgba(227, 231, 238, 0.51);
 }
+
+#signupSuccess {
+    text-align: center;
+    margin: auto auto 2em auto;
+    display: none;
+    width: 80%;
+    color: green;
+    float: none;
+    font-family: inherit;
+    bottom: 20px;
+    font-size: inherit;
+    background-color: rgba(227, 231, 238, 0.51);
+}
