@@ -36,6 +36,7 @@ require("./requires/modal");
 const login = require("./requires/login");
 const logout = require("./requires/logout");
 const signup = require("./requires/signup");
+const rides = require("./requires/rides");
 
 // document event listeners definitions
 
@@ -43,6 +44,7 @@ const login_form = document.getElementById("form-sign-in");
 const signup_form = document.getElementById("form-sign-up");
 const logout_button = document.getElementById("logout");
 const about_button = document.getElementById("about");
+const new_offer_form = document.getElementById("form-add-new-offer");
 
 if (login_form){
 	login_form.addEventListener("submit", (form) => login.login(form));
@@ -65,4 +67,7 @@ if (about_button){
 			location.href = PASSENGER_PATH;
 		}
 	});
+}
+if (new_offer_form){
+	new_offer_form.addEventListener("submit", (form) => rides.add_ride(form));
 }
