@@ -49,5 +49,6 @@ let make_request_service = (URL, data={}) => {
 module.exports = {
 	login_service: make_request_service,
 	logout_service: make_request_service,
-	signup_service: make_request_service
+	signup_service: make_request_service,
+	add_ride_service: make_request_service
 };
