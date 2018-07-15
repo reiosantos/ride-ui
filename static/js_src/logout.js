@@ -1,12 +1,13 @@
-import {logout_service} from "./services/logout.service";
-import {WELCOME_PATH} from "./variable_constants";
+
+import {LOGOUT_URL, WELCOME_PATH} from "./variable_constants";
+import {logout_service} from "./services/commons.service";
 
 let logout = async (event) => {
 	event.preventDefault();
 
 	if (confirm("Are you sure you want to log out?")) {
 
-		let response = await logout_service();
+		let response = await logout_service(LOGOUT_URL);
 
 			if ((typeof response === "boolean"
 				&& response)
