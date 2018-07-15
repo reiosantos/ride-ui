@@ -1,5 +1,6 @@
 import {validateContact, validatePassword} from "./main";
-import {signup_service} from "./services/signup.service";
+import {SIGNUP_URL} from "./variable_constants";
+import {signup_service} from "./services/commons.service";
 
 let signup = async (form) => {
 
@@ -38,7 +39,7 @@ let signup = async (form) => {
 						username: username.value,
 						password: password.value
 					};
-					let response = await signup_service(data);
+					let response = await signup_service(SIGNUP_URL, data);
 
 					if (response && response.hasOwnProperty("success_message")){
 
