@@ -1,6 +1,6 @@
-import {validateContact, validatePassword} from "./extras/main";
-import {SIGNUP_URL} from "./extras/variable_constants";
-import {signup_service} from "./services/commons.service";
+import {validateContact, validatePassword} from "../extras/main";
+import {SIGNUP_URL} from "../extras/variable_constants";
+import {signup_service} from "../services/commons.service";
 
 let signup = async (form) => {
 
