@@ -1,18 +1,18 @@
 
-function validateContact(phone) {
+let validateContact = (phone) => {
 	const re = /\(?\d{3}\)?([-\s.])?\d{3}\1?\d{4}/;
 	return re.test(phone.toLowerCase());
-}
+};
 
-function validateAmount(cost) {
+let validateAmount = (cost) => {
 	let re = /^[.0-9]+$/;
 	return re.test(cost);
-}
+};
 
-function validatePassword(password) {
+let validatePassword = (password) => {
 	const re = /^[\S\s]{6,}$/;
 	return re.test(password.toLowerCase());
-}
+};
 
 let validateDate = (date) => {
 	const date_re = /^(\d{4})-(\d{1,2})-(\d{1,2})$/;
