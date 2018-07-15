@@ -1,6 +1,6 @@
-import {validatePassword} from "./main";
-import {login_service} from "./services/login.service";
-import {PROPERTY_USER, USER_TYPE_DRIVER, USER_TYPE_PASSENGER} from "./variable_constants";
+import {validatePassword} from "./extras/main";
+import {LOGIN_URL, PROPERTY_USER, USER_TYPE_DRIVER, USER_TYPE_PASSENGER} from "./extras/variable_constants";
+import {login_service} from "./services/commons.service";
 
 let login = async (form) => {
 
@@ -25,7 +25,7 @@ let login = async (form) => {
 				username: username.value,
 				password: password.value
 			};
-			let response = await login_service(data);
+			let response = await login_service(LOGIN_URL, data);
 
 			if (typeof response === "boolean" && response){
 				let user= JSON.parse(localStorage.getItem(PROPERTY_USER));
