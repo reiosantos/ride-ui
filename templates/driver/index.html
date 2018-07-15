@@ -31,18 +31,30 @@
         <div class="col-3">
             <h3 class="title">New Ride Offer</h3>
 
-            <form class="form-signin" id="form-new-offer" method="get" action="" onsubmit="return saveRide(this);">
+            <span id="loginError"></span>
+            <span id="signupSuccess"></span>
 
-                <label for="inputLocation" class="sm-only">Location</label>
-                <input type="text" name="inputLocation" id="inputLocation" class="form-control"
-                       placeholder="To location" required
-                       autofocus>
-                <span class="errorSpan" id="locationError">This field is required and should be a valid location.</span>
+            <form class="form-signin" id="form-add-new-offer" method="get" action="">
 
-                <label for="inputCost" class="sm-only">Contact</label>
-                <input type="number" name="inputCost" id="inputCost" class="form-control" placeholder="eg, 24000"
+                <label for="inputDestination" class="sm-only">Destinaton</label>
+                <input type="text" name="inputDestination" id="inputDestination" class="form-control"
+                       placeholder="Destination" required autofocus>
+                <span class="errorSpan" id="destinationError">This field is required and should be a valid location.</span>
+
+                <label for="inputTripFrom" class="sm-only">From</label>
+                <input type="text" name="inputTripFrom" id="inputTripFrom" class="form-control"
+                       placeholder="From" required autofocus>
+                <span class="errorSpan" id="tripFromError">This field is required and should be a valid location.</span>
+
+                <label for="inputCost" class="sm-only">Cost</label>
+                <input type="number" name="inputCost" id="inputCost" min="0" class="form-control" placeholder="eg, 24000"
                        required autofocus>
-                <span class="errorSpan" id="costError">route cost is required and should be a real number.</span>
+                <span class="errorSpan" id="costError">Cost is required and should be a number greater than 0.</span>
+
+                <label for="inputDate" class="sm-only">Departure Date</label>
+                <input type="datetime-local" name="inputDate" id="inputDate" class="form-control" placeholder="yyyy-mm-dd HH:MM:SS"
+                       required autofocus>
+                <span class="errorSpan" id="departTimeError">provide a valid date format (yyyy-mm-dd HH:MM:SS).</span>
 
                 <button class="button button-p put-right" type="submit"><i class="fa fa-plus-circle"></i> Add offer</button>
             </form>
@@ -52,7 +64,7 @@
 
             <form class="form-signin" id="form-search-offer" onsubmit="searchRide(this);">
 
-                <label for="inputLocation" class="sm-only">Location</label>
+                <label for="inputRideLocation" class="sm-only">Location</label>
 
                 <input type="text" name="inputRideLocation" id="inputRideLocation" class="form-control"
                        placeholder="Search offers by destination" required autofocus>
