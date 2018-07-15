@@ -2,7 +2,7 @@ import {
 	DRIVER_PATH,
 	LOGIN_PATH, PASSENGER_PATH, PROPERTY_AUTH_TOKEN, PROPERTY_USER, SIGNUP_PATH, USER_TYPE_DRIVER, USER_TYPE_PASSENGER,
 	WELCOME_PATH
-} from "./variable_constants";
+} from "./extras/variable_constants";
 
 if (location.pathname !== LOGIN_PATH
 	&& location.pathname !== SIGNUP_PATH
@@ -32,11 +32,10 @@ if (location.pathname !== LOGIN_PATH
 	}
 }
 
-require("./modal");
-const login = require("./login");
-const logout = require("./logout");
-const signup = require("./signup");
-
+require("./requires/modal");
+const login = require("./requires/login");
+const logout = require("./requires/logout");
+const signup = require("./requires/signup");
 
 // document event listeners definitions
 
