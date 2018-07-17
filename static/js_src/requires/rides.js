@@ -1,6 +1,10 @@
 import {formatDateTime, validateAmount, validateDate, validateTime} from "../extras/main";
 import {ADD_AND_RETRIEVE_RIDES_URL} from "../extras/variable_constants";
-import {add_ride_service} from "../services/commons.service";
+import {add_ride_service, fetch_all_rides_service} from "../services/commons.service";
+import {prepare_modal} from "./modal";
+
+let all_rides = [];
+let all_rides_original = [];
 
 let add_ride = (form) => {
 
@@ -73,6 +77,7 @@ let handle_request = async (data, error_panel, success_panel) => {
 		success_panel.innerHTML = response.success_message;
 		success_panel.style.display = "block";
 		error_panel.style.display = "none";
+		fetch_all_rides()
 
 	} else if (response
 		&& response.hasOwnProperty("error_message")
@@ -87,6 +92,106 @@ let handle_request = async (data, error_panel, success_panel) => {
 	return true;
 };
 
+let fetch_all_rides = async () => {
+
+	let response = await fetch_all_rides_service(ADD_AND_RETRIEVE_RIDES_URL);
+
+	if (response
+		&& response.hasOwnProperty("data")
+		&& response.data !== false) {
+
+		all_rides.length = 0;
+		all_rides_original.length = 0;
+
+		all_rides.push(...response.data);
+		all_rides_original.push(...response.data);
+
+		populate_rides(all_rides_original);
+
+		let taken = 0;
+		for (let ride of all_rides_original) {
+			if (ride.hasOwnProperty("status")){
+				if (ride.status.trim().toLowerCase() !== "available") {
+					taken += 1;
+				}
+			}
+		}
+		document.getElementById("rides_given").innerText = all_rides_original.length;
+		document.getElementById("rides_taken").innerText = taken;
+	}
+};
+
+let search_rides = (term) => {
+
+		const temp = [];
+		for (let i = 0; i < all_rides_original.length; i++) {
+
+			const ride = all_rides_original[i];
+
+			if (ride.hasOwnProperty("destination")
+				&& ride.destination.trim().toLocaleLowerCase().search(term.trim().toLowerCase()) >= 0
+			) {
+				temp.push(ride);
+			}
+		}
+		populate_rides(temp);
+};
+
+let populate_rides = (data) => {
+
+	let table_body = document.getElementById("rideOffers").querySelector("tbody");
+
+	let fill_ride_data = (date, rows) => {
+
+		return `<tr>
+                    <td class="post_date">${new Date(date).toDateString()}</td>
+                    <td colspan="3">
+                        <table class="table bordered">
+                        
+                            <thead><tr><th>Pass. Names</th><th>Destination</th><th>Status</th></tr></thead>
+                            
+                            <tbody>
+                            
+                            ${rows.map(ride_rows).join("")}
+                            
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>`;
+	};
+
+	let ride_rows = (row) => {
+
+		let name = row.hasOwnProperty("passenger_name") ? row.passenger_name : "------------------";
+		let destination = row.hasOwnProperty("destination") ? row.destination : "No destination";
+		let status = row.status;
+
+		return `<tr class="more-details" data='${JSON.stringify(row)}'>
+                                <td>${name}</td>
+                                <td>${destination}</td>
+                                <td class="${status}">${status.charAt(0).toUpperCase()}${status.slice(1)}</td>
+                            </tr>`;
+	};
+
+	let rides = {};
+		for (let ride of  data) {
+			let date_key = ride.post_date.split(" ")[0];
+
+			if (!rides.hasOwnProperty(date_key)) {
+				rides[date_key] = [];
+			}
+			rides[date_key].push(ride);
+		}
+		table_body.innerHTML = "";
+		const keys = Object.keys(rides);
+		for (let key of keys) {
+			table_body.innerHTML += fill_ride_data(key, rides[key]);
+		}
+		prepare_modal();
+};
+
 module.exports = {
-	add_ride: add_ride
+	search_rides: search_rides,
+	add_ride: add_ride,
+	fetch_all_rides: fetch_all_rides,
 };
