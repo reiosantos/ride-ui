@@ -1,5 +1,8 @@
 
-import {HEADERS, LOGIN_URL, LOGOUT_URL, PROPERTY_AUTH_TOKEN, PROPERTY_USER} from "../extras/variable_constants";
+import {
+	HEADERS, LOGIN_PATH, LOGIN_URL, LOGOUT_URL, PROPERTY_AUTH_TOKEN,
+	PROPERTY_USER
+} from "../extras/variable_constants";
 
 let make_post_request_service = (URL, data={}) => {
 
@@ -42,6 +45,10 @@ let make_post_request_service = (URL, data={}) => {
 			if (URL === LOGIN_URL) {
 				return error.json();
 			}
+			if (error.status === 401){
+				localStorage.clear();
+				location.href = LOGIN_PATH;
+			}
 			return error;
 		});
 };
@@ -69,6 +76,11 @@ let make_get_request_service = (URL) => {
 			return data;
 		})
 		.catch(function (error) {
+
+			if (error.status === 401){
+				localStorage.clear();
+				location.href = LOGIN_PATH;
+			}
 			return error;
 		});
 };
