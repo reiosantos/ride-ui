@@ -62,7 +62,7 @@
             <h4>Offer Filters</h4>
             <hr>
 
-            <form class="form-signin" id="form-search-offer" onsubmit="searchRide(this);">
+            <form class="form-signin" id="form-search-offer" action="">
 
                 <label for="inputRideLocation" class="sm-only">Location</label>
 
@@ -76,67 +76,18 @@
         <div class="col-5">
             <h3 class="title">Rides given/taken</h3>
 
-            <table class="table bordered">
+            <table class="table bordered" id="rideOffers">
                 <thead>
                 <tr class="totals">
-                    <th>Total rides given: 4</th>
-                    <th>Rides taken: 3</th>
+                    <th>Total rides given: <i id="rides_given"></i></th>
+                    <th colspan="3">Rides taken: <i id="rides_taken"></i></th>
                 </tr>
                 <tr>
-                    <th>Date</th>
-                    <th>Clients</th>
+                    <th>Post Date</th>
+                    <th colspan="3">Clients</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>4<sup>th</sup> June 2018</td>
-                    <td>
-                        <table class="table bordered">
-                            <thead>
-                            <tr>
-                                <th>Names</th>
-                                <th>Status</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr class="more-details">
-                                <td>Reio Kazigo</td>
-                                <td class="taken">Taken</td>
-                            </tr>
-                            <tr class="more-details">
-                                <td></td>
-                                <td class="available">available</td>
-                            </tr>
-                            <tr class="more-details">
-                                <td>Senoga simon</td>
-                                <td class="taken">Taken</td>
-                            </tr>
-                            <tr class="more-details">
-                                <td>Reio Kazigo</td>
-                                <td class="taken">Taken</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>1<sup>st</sup> June 2018</td>
-                    <td>
-                        <table class="table bordered">
-                            <tbody>
-                            <tr class="more-details">
-                                <td>Senoga simon</td>
-                                <td class="taken">Taken</td>
-                            </tr>
-                            <tr class="more-details">
-                                <td>Reio Kazigo</td>
-                                <td class="taken">Taken</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </td>
-                </tr>
 
                 </tbody>
 
@@ -226,28 +177,40 @@
             <table class="table bordered" style="background: #fff">
                 <tbody>
                 <tr>
+                    <td>Ride ID:</td>
+                    <td id="modal-ride-id"></td>
+                </tr>
+                <tr>
                     <td>Passenger Name:</td>
-                    <td id="modal-name"></td>
+                    <td id="modal-passenger-name"></td>
                 </tr>
                 <tr>
                     <td>Passenger Contact:</td>
-                    <td id="modal-contact"></td>
+                    <td id="modal-passenger-contact"></td>
                 </tr>
                 <tr>
                     <td>Trip Status</td>
-                    <td id="modal-status"></td>
+                    <td id="modal-trip-status"></td>
                 </tr>
                 <tr>
-                    <td>Trip to:</td>
-                    <td id="modal-tripto"></td>
+                    <td>From:</td>
+                    <td id="modal-trip-from"></td>
+                </tr>
+                <tr>
+                    <td>Destination:</td>
+                    <td id="modal-destination"></td>
                 </tr>
                 <tr>
                     <td>Cost:</td>
-                    <td id="modal-cost">Cost: ~3000 Ush</td>
+                    <td id="modal-trip-cost">Cost: ~3000 Ush</td>
+                </tr>
+                <tr>
+                    <td>Departure Date:</td>
+                    <td id="modal-depart-date"></td>
                 </tr>
                 <tr>
                     <td>Offer Date:</td>
-                    <td id="modal-date"></td>
+                    <td id="modal-post-date"></td>
                 </tr>
                 </tbody>
             </table>
