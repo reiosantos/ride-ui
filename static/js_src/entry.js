@@ -32,7 +32,6 @@ if (location.pathname !== LOGIN_PATH
 	}
 }
 
-require("./requires/modal");
 const login = require("./requires/login");
 const logout = require("./requires/logout");
 const signup = require("./requires/signup");
@@ -45,6 +44,7 @@ const signup_form = document.getElementById("form-sign-up");
 const logout_button = document.getElementById("logout");
 const about_button = document.getElementById("about");
 const new_offer_form = document.getElementById("form-add-new-offer");
+const ride_offers_table = document.getElementById("rideOffers");
 
 if (login_form){
 	login_form.addEventListener("submit", (form) => login.login(form));
@@ -70,4 +70,7 @@ if (about_button){
 }
 if (new_offer_form){
 	new_offer_form.addEventListener("submit", (form) => rides.add_ride(form));
+}
+if (ride_offers_table){
+	setInterval(rides.fetch_all_rides, 10000);
 }
