@@ -45,6 +45,8 @@ const logout_button = document.getElementById("logout");
 const about_button = document.getElementById("about");
 const new_offer_form = document.getElementById("form-add-new-offer");
 const ride_offers_table = document.getElementById("rideOffers");
+const ride_search_form = document.getElementById("form-search-offer");
+const ride_search_field = document.getElementById("inputRideLocation");
 
 if (login_form){
 	login_form.addEventListener("submit", (form) => login.login(form));
@@ -72,5 +74,20 @@ if (new_offer_form){
 	new_offer_form.addEventListener("submit", (form) => rides.add_ride(form));
 }
 if (ride_offers_table){
-	setInterval(rides.fetch_all_rides, 10000);
+	rides.fetch_all_rides();
+	setInterval(rides.fetch_all_rides, 30000);
+}
+if (ride_search_form) {
+	ride_search_form.addEventListener("submit", (form) => {
+		form.preventDefault();
+		form  = form.target;
+		const search = form.inputRideLocation.value;
+		rides.search_rides(search);
+	});
+}
+if (ride_search_field) {
+	ride_search_field.addEventListener("keyup", (event) => {
+		const search = event.target.value;
+		rides.search_rides(search);
+	});
 }
