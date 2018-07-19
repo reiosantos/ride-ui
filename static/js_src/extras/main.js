@@ -109,6 +109,13 @@ let formatDateTime = (date) => {
 
 };
 
+let sformat = (source, params) => {
+	for (let i in params) {
+		source = source.replace(new RegExp("\\{" + i + "\\}", "g"), params[i]);
+	}
+	return source;
+};
+
 export let exports = {};
 
-export {validateContact, validatePassword, validateAmount, validateTime, validateDate, formatDateTime};
+export {validateContact, validatePassword, validateAmount, validateTime, validateDate, formatDateTime, sformat};
