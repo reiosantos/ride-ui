@@ -1,6 +1,6 @@
 import {formatDateTime, sformat, sort_rides, validateAmount, validateDate, validateTime} from "../extras/main";
 import {ADD_AND_RETRIEVE_RIDES_URL} from "../extras/variable_constants";
-import {add_ride_service, fetch_all_rides_service} from "../services/commons.service";
+import {http_service} from "../services/commons.service";
 import {prepare_modal} from "./modal";
 
 let all_rides_original = [];
@@ -69,7 +69,7 @@ let add_ride = (form) => {
 
 let handle_request = async (data, error_panel, success_panel) => {
 
-	let response = await add_ride_service(ADD_AND_RETRIEVE_RIDES_URL, data);
+	let response = await http_service(ADD_AND_RETRIEVE_RIDES_URL, "POST", data);
 
 	if (response && response.hasOwnProperty("success_message")) {
 
@@ -93,7 +93,7 @@ let handle_request = async (data, error_panel, success_panel) => {
 
 let fetch_all_rides = async () => {
 
-	let response = await fetch_all_rides_service(ADD_AND_RETRIEVE_RIDES_URL);
+	let response = await http_service(ADD_AND_RETRIEVE_RIDES_URL, "GET");
 
 	let options = `<option value='0'>--------------------------------------------</option>`;
 	let temp_option = `<option value='{0}'>{1}</option>`;
@@ -152,7 +152,7 @@ let populate_rides = (data) => {
                     <td colspan="3">
                         <table class="table bordered">
                         
-                            <thead><tr><th>Pass. Names</th><th>Destination</th><th>Status</th></tr></thead>
+                            <thead><tr><th>From</th><th>Destination</th><th>Status</th></tr></thead>
                             
                             <tbody>
                             
@@ -166,7 +166,7 @@ let populate_rides = (data) => {
 
 	let ride_rows = (row) => {
 
-		let name = row.hasOwnProperty("passenger_name") ? row.passenger_name : "------------------";
+		let name = row.hasOwnProperty("trip_from") ? row.trip_from : "No source";
 		let destination = row.hasOwnProperty("destination") ? row.destination : "No destination";
 		let status = row.status;
 
