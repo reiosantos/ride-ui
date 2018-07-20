@@ -16,13 +16,15 @@ let logout = async (event) => {
 
 				location.href = WELCOME_PATH;
 				return true;
-			}
 
-			let resp = response.json();
-			if (resp.hasOwnProperty("message")) {
-				alert(`${resp.message}`);
+			} else {
+				response.json().then((response) => {
+					if (response.hasOwnProperty("error_message")) {
+						alert(`${resp.error_message}`);
+					}
+					return false;
+				});
 			}
-			return false;
 	}
 	return false;
 };

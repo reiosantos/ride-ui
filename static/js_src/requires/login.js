@@ -5,7 +5,7 @@ import {http_service} from "../services/commons.service";
 let login = async (form) => {
 
 	form.preventDefault();
-	form  = form.target;
+	form = form.target;
 
 	let username = form.inputUsername;
 	let password = form.inputPassword;
@@ -26,8 +26,8 @@ let login = async (form) => {
 				password: password.value
 			};
 			let response = await http_service(LOGIN_URL, "POST", data);
-			if (typeof response === "boolean" && response){
-				let user= JSON.parse(localStorage.getItem(PROPERTY_USER));
+			if (typeof response === "boolean" && response) {
+				let user = JSON.parse(localStorage.getItem(PROPERTY_USER));
 
 				if (!user) {
 					error_panel.innerHTML = "<b>Please clear your browsers cache and login again.. </b>";
@@ -42,12 +42,16 @@ let login = async (form) => {
 					location.assign("driver/index.html");
 				}
 				return true;
+			} else {
+				response.json().then((response) => {
+					if (response.hasOwnProperty("error_message")) {
+						error_panel.innerHTML = `<b>${response.error_message}</b>`;
+						error_panel.style.display = "block";
+					}
+					return false;
+				});
+				return false;
 			}
-			if (response.hasOwnProperty("error_message")) {
-				error_panel.innerHTML = `<b>${response.error_message}</b>`;
-				error_panel.style.display = "block";
-			}
-			return false;
 		}
 		password_error.style.display = "block";
 		return false;

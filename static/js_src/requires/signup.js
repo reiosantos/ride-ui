@@ -5,7 +5,7 @@ import {http_service} from "../services/commons.service";
 let signup = async (form) => {
 
 	form.preventDefault();
-	form  = form.target;
+	form = form.target;
 
 	const username = form.inputUsername;
 	const password = form.inputPassword;
@@ -41,21 +41,27 @@ let signup = async (form) => {
 					};
 					let response = await http_service(SIGNUP_URL, "POST", data);
 
-					if (response && response.hasOwnProperty("success_message")){
+					if (response && response.hasOwnProperty("success_message")) {
 
 						success_panel.innerHTML = response.success_message;
 						success_panel.style.display = "block";
 						error_panel.style.display = "none";
 
-					}else if (response
-						&& response.hasOwnProperty("error_message")
-						&& response.hasOwnProperty("data")) {
+					} else {
+						response.json().then((response) => {
+							if (response
+								&& response.hasOwnProperty("error_message")
+								&& response.hasOwnProperty("data")) {
 
-						error_panel.innerHTML = `${response.error_message} <br> ${response.data ? response.data : ""}`;
-						error_panel.style.display = "block";
-					}else{
-						error_panel.innerHTML = "Unknown error. consult the administrator";
-						error_panel.style.display = "block";
+								error_panel.innerHTML = `${response.error_message} <br> ${response.data ? response.data : ""}`;
+								error_panel.style.display = "block";
+							} else {
+								error_panel.innerHTML = "Unknown error. consult the administrator";
+								error_panel.style.display = "block";
+
+								return false;
+							}
+						});
 					}
 					return true;
 				}
