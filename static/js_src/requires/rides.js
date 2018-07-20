@@ -76,17 +76,23 @@ let handle_request = async (data, error_panel, success_panel) => {
 		success_panel.innerHTML = response.success_message;
 		success_panel.style.display = "block";
 		error_panel.style.display = "none";
-		fetch_all_rides()
+		fetch_all_rides();
 
-	} else if (response
-		&& response.hasOwnProperty("error_message")
-		&& response.hasOwnProperty("data")) {
-
-		error_panel.innerHTML = `${response.error_message} <br> ${response.data ? response.data : ""}`;
-		error_panel.style.display = "block";
 	} else {
-		error_panel.innerHTML = "Unknown error. consult the administrator";
-		error_panel.style.display = "block";
+		response.json().then((response) => {
+			if (response
+				&& response.hasOwnProperty("error_message")
+				&& response.hasOwnProperty("data")) {
+
+				error_panel.innerHTML = `${response.error_message} <br> ${response.data ? response.data : ""}`;
+				error_panel.style.display = "block";
+			} else {
+				error_panel.innerHTML = "Unknown error. consult the administrator";
+				error_panel.style.display = "block";
+
+				return false;
+			}
+		});
 	}
 	return true;
 };
@@ -111,7 +117,7 @@ let fetch_all_rides = async () => {
 
 		let taken = 0;
 		for (let ride of all_rides_original) {
-			if (ride.hasOwnProperty("status")){
+			if (ride.hasOwnProperty("status")) {
 				if (ride.status.trim().toLowerCase() !== "available") {
 					taken += 1;
 				}
@@ -127,18 +133,18 @@ let fetch_all_rides = async () => {
 
 let search_rides = (term) => {
 
-		const temp = [];
-		for (let i = 0; i < all_rides_original.length; i++) {
+	const temp = [];
+	for (let i = 0; i < all_rides_original.length; i++) {
 
-			const ride = all_rides_original[i];
+		const ride = all_rides_original[i];
 
-			if (ride.hasOwnProperty("destination")
-				&& ride.destination.trim().toLocaleLowerCase().search(term.trim().toLowerCase()) >= 0
-			) {
-				temp.push(ride);
-			}
+		if (ride.hasOwnProperty("destination")
+			&& ride.destination.trim().toLocaleLowerCase().search(term.trim().toLowerCase()) >= 0
+		) {
+			temp.push(ride);
 		}
-		populate_rides(temp);
+	}
+	populate_rides(temp);
 };
 
 let populate_rides = (data) => {
@@ -178,20 +184,20 @@ let populate_rides = (data) => {
 	};
 
 	let rides = {};
-		for (let ride of  data) {
-			let date_key = ride.post_date.split(" ")[0];
+	for (let ride of  data) {
+		let date_key = ride.post_date.split(" ")[0];
 
-			if (!rides.hasOwnProperty(date_key)) {
-				rides[date_key] = [];
-			}
-			rides[date_key].push(ride);
+		if (!rides.hasOwnProperty(date_key)) {
+			rides[date_key] = [];
 		}
-		table_body.innerHTML = "";
-		const keys = Object.keys(rides);
-		for (let key of keys) {
-			table_body.innerHTML += fill_ride_data(key, rides[key]);
-		}
-		prepare_modal();
+		rides[date_key].push(ride);
+	}
+	table_body.innerHTML = "";
+	const keys = Object.keys(rides);
+	for (let key of keys) {
+		table_body.innerHTML += fill_ride_data(key, rides[key]);
+	}
+	prepare_modal();
 };
 
 module.exports = {
