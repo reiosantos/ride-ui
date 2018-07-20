@@ -116,6 +116,16 @@ let sformat = (source, params) => {
 	return source;
 };
 
+let  sort_rides = (a, b) => {
+	if (a.post_date > b.post_date) {
+		return -1;
+	}
+	if (a.post_date < b.post_date) {
+		return 1;
+	}
+	return 0;
+};
+
 export let exports = {};
 
-export {validateContact, validatePassword, validateAmount, validateTime, validateDate, formatDateTime, sformat};
+export {validateContact, validatePassword, validateAmount, validateTime, validateDate, formatDateTime, sformat, sort_rides};
