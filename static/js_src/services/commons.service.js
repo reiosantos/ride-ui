@@ -7,7 +7,6 @@ import {
 let http_request_service = (URL, method="POST", data={}) => {
 
 	HEADERS["Authorization"] = `JWT ${localStorage.getItem(PROPERTY_AUTH_TOKEN)}`;
-	console.log(URL);
 
 	let options = {
 		method: method,
@@ -43,7 +42,6 @@ let http_request_service = (URL, method="POST", data={}) => {
 				}
 				return true;
 			}
-			console.log(data);
 			return data;
 		})
 		.catch(function (error) {
@@ -54,7 +52,6 @@ let http_request_service = (URL, method="POST", data={}) => {
 				localStorage.clear();
 				location.href = LOGIN_PATH;
 			}
-			console.log(error);
 			return error;
 		});
 };
