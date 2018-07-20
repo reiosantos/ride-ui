@@ -1,6 +1,6 @@
 import {validatePassword} from "../extras/main";
 import {LOGIN_URL, PROPERTY_USER, USER_TYPE_DRIVER, USER_TYPE_PASSENGER} from "../extras/variable_constants";
-import {login_service} from "../services/commons.service";
+import {http_service} from "../services/commons.service";
 
 let login = async (form) => {
 
@@ -25,7 +25,7 @@ let login = async (form) => {
 				username: username.value,
 				password: password.value
 			};
-			let response = await login_service(LOGIN_URL, data);
+			let response = await http_service(LOGIN_URL, "POST", data);
 			if (typeof response === "boolean" && response){
 				let user= JSON.parse(localStorage.getItem(PROPERTY_USER));
 
@@ -44,7 +44,7 @@ let login = async (form) => {
 				return true;
 			}
 			if (response.hasOwnProperty("error_message")) {
-				error_panel.innerHTML = `<b>${response.error_message}</b>`
+				error_panel.innerHTML = `<b>${response.error_message}</b>`;
 				error_panel.style.display = "block";
 			}
 			return false;
