@@ -98,6 +98,9 @@
         <div class="col-4">
             <h3 class="title">Customer requests</h3>
 
+            <span id="loginError_1"></span>
+            <span id="signupSuccess_1"></span>
+
             <label for="rides_list">Select a ride</label>
             <select name="rides_list" class="form-control" id="rides_list">
                 <option value="0">--------------------</option>
@@ -106,10 +109,9 @@
             <table class="table bordered" id="rideRequests">
                 <thead>
                 <tr class="totals-green">
-                    <th colspan="2">Total passenger requests: <i id="total_requests"></i></th>
+                    <th>Total passenger requests: <i id="total_requests"></i></th>
                 </tr>
                 <tr>
-                    <th>Date</th>
                     <th>Client</th>
                 </tr>
 
