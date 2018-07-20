@@ -32,7 +32,10 @@ let populate_passenger_rides = (data) => {
                     <td>
                         <table class="table bordered">
                         
-                            <thead><tr><th>From</th><th>Destination</th><th>Status</th></tr></thead>
+                            <thead>
+                            <tr><th>From</th><th>Destination</th><th>Status</th></tr>
+                            <tr><th style="text-align: center;" colspan="3">Offer date: ${new Date(date).toDateString()}</th></tr>
+                            </thead>
                             
                             <tbody>
                             
