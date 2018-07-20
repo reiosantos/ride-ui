@@ -91,4 +91,5 @@ module.exports = {
 	signup_service: make_post_request_service,
 	add_ride_service: make_post_request_service,
 	fetch_all_rides_service: make_get_request_service,
+	fetch_all_ride_requests_service: make_get_request_service,
 };
