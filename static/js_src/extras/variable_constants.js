@@ -15,7 +15,8 @@ export const LOGIN_URL = `${BASE_URL}/auth/login`;
 export const LOGOUT_URL = `${BASE_URL}/auth/logout`;
 export const SIGNUP_URL = `${BASE_URL}/auth/signup`;
 export const ADD_AND_RETRIEVE_RIDES_URL = `${BASE_URL}/rides`;
-export const FETCH_RIDE_REQUESTS_URL = `${BASE_URL}/rides/{0}/requests`;
+export const POST_FETCH_RIDE_REQUESTS_URL = `${BASE_URL}/rides/{0}/requests`;
+export const UPDATE_RIDE_REQUESTS_URL = `${BASE_URL}/rides/{0}/requests/{1}`;
 
 export const PROPERTY_AUTH_TOKEN = "auth_token";
 export const PROPERTY_USER = "user";
