@@ -99,7 +99,6 @@ if (ride_requests_table && ride_list){
 	ride_list.addEventListener("change", (event) => {
 		let val = event.target.value;
 		if (val !== "0"){
-			alert(val);
 			requests.fetch_all_ride_requests(val);
 		}
 	});
