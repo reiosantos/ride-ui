@@ -5,6 +5,7 @@
 
     <link href="../../static/css/main.css" rel="stylesheet">
     <link href="../../static/css/home.css" rel="stylesheet">
+    <link href="../../static/css/signup.css" rel="stylesheet">
     <link href="../../static/css/modal.css" rel="stylesheet">
     <link href="../../static/font-awesome/css/font-awesome.css" rel="stylesheet">
 
@@ -99,45 +100,16 @@
         <div class="col-6">
             <h3 class="title">Available Offers</h3>
 
-            <table class="table bordered">
+            <span id="loginError"></span>
+            <span id="signupSuccess"></span>
+
+            <table class="table bordered" id="rideOffers">
                 <thead>
                 <tr class="totals-green">
-                    <th>Total: 4</th>
+                    <th>Total: <i id="total_rides"></i></th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>
-                        <table class="table bordered">
-                            <thead>
-                            <tr>
-                                <th>To</th>
-                                <th>Action</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr class="more-details">
-                                <td>Namagunga</td>
-                                <td>
-                                    <button class="accept">send request</button>
-                                </td>
-                            </tr>
-                            <tr class="more-details">
-                                <td>Kasubi</td>
-                                <td>
-                                    <button class="accept">send request</button>
-                                </td>
-                            </tr>
-                            <tr class="more-details">
-                                <td>Nakulabye</td>
-                                <td>
-                                    <button class="accept">send request</button>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </td>
-                </tr>
 
                 </tbody>
 
@@ -153,6 +125,7 @@
 
 </div>
 
+<!-- Details Modal -->
 <div id="myModal" class="modal">
     <!-- Modal content -->
     <div class="modal-content">
@@ -167,28 +140,44 @@
             <table class="table bordered" style="background: #fff">
                 <tbody>
                 <tr>
-                    <td>Driver Name:</td>
-                    <td id="modal-name"></td>
+                    <td>Ride ID:</td>
+                    <td id="modal-ride-id"></td>
                 </tr>
                 <tr>
-                    <td>Driver Contact:</td>
-                    <td id="modal-contact"></td>
+                    <td>Passenger Name:</td>
+                    <td id="modal-passenger-name"></td>
+                </tr>
+                <tr>
+                    <td>Passenger Contact:</td>
+                    <td id="modal-passenger-contact"></td>
+                </tr>
+                <tr>
+                    <td>Request Date:</td>
+                    <td id="modal-request-date"></td>
                 </tr>
                 <tr>
                     <td>Trip Status</td>
-                    <td id="modal-status"></td>
+                    <td id="modal-trip-status"></td>
                 </tr>
                 <tr>
-                    <td>Trip to:</td>
-                    <td id="modal-tripto"></td>
+                    <td>From:</td>
+                    <td id="modal-trip-from"></td>
+                </tr>
+                <tr>
+                    <td>Destination:</td>
+                    <td id="modal-destination"></td>
                 </tr>
                 <tr>
                     <td>Cost:</td>
-                    <td id="modal-cost">Cost: ~3000 Ush</td>
+                    <td id="modal-trip-cost">Cost: ~3000 Ush</td>
+                </tr>
+                <tr>
+                    <td>Departure Date:</td>
+                    <td id="modal-depart-date"></td>
                 </tr>
                 <tr>
                     <td>Offer Date:</td>
-                    <td id="modal-date"></td>
+                    <td id="modal-post-date"></td>
                 </tr>
                 </tbody>
             </table>
