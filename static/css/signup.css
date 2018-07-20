@@ -56,7 +56,7 @@ select {
     vertical-align: middle;
     vert-align: middle;
 }
-#loginError {
+#loginError, #loginError_1 {
     text-align: center;
     margin: auto auto 2em auto;
     display: none;
@@ -69,7 +69,7 @@ select {
     background-color: rgba(227, 231, 238, 0.51);
 }
 
-#signupSuccess {
+#signupSuccess, #signupSuccess_1 {
     text-align: center;
     margin: auto auto 2em auto;
     display: none;
