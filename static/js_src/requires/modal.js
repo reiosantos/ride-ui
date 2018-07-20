@@ -12,6 +12,10 @@ let prepare_modal = () => {
 		if (data) {
 			data = JSON.parse(data);
 
+			modal.querySelector("#modal-request-date").closest("tr").style.display = "table-row";
+			modal.querySelector("#modal-passenger-contact").closest("tr").style.display = "table-row";
+			modal.querySelector("#modal-passenger-name").closest("tr").style.display = "table-row";
+
 			modal.querySelector("#modal-ride-id").innerText = data.hasOwnProperty("ride_id") ? data.ride_id : "";
 			modal.querySelector("#modal-passenger-name").innerText = data.hasOwnProperty("passenger_name") ? data.passenger_name : "";
 			modal.querySelector("#modal-trip-status").innerText = data.hasOwnProperty("status") ? data.status : "";
@@ -20,7 +24,12 @@ let prepare_modal = () => {
 			modal.querySelector("#modal-trip-cost").innerText = (data.hasOwnProperty("cost") ? data.cost : 0) + " Ugx";
 			modal.querySelector("#modal-post-date").innerText = data.hasOwnProperty("post_date") ? new Date(data.post_date) : "";
 			modal.querySelector("#modal-depart-date").innerText = data.hasOwnProperty("departure_time") ? new Date(data.departure_time) : "";
-			modal.querySelector("#modal-passenger-contact").innerText = data.hasOwnProperty("contact") ? data.contact : "";
+			modal.querySelector("#modal-passenger-contact").innerText = data.hasOwnProperty("passenger_contact") ? data.contact : "";
+			modal.querySelector("#modal-request-date").innerText = data.hasOwnProperty("request_date") ? new Date(data.request_date) : "";
+
+			if (!data.hasOwnProperty("request_date")) { modal.querySelector("#modal-request-date").closest("tr").style.display = "none"; }
+			if (!data.hasOwnProperty("passenger_contact")) { modal.querySelector("#modal-passenger-contact").closest("tr").style.display = "none"; }
+			if (!data.hasOwnProperty("passenger_name")) { modal.querySelector("#modal-passenger-name").closest("tr").style.display = "none"; }
 
 			modal.style.display = "block";
 		}
