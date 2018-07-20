@@ -19,8 +19,6 @@ let fetch_all_passenger_rides = async () => {
 		all_rides_original.sort(sort_rides);
 
 		populate_passenger_rides(all_rides_original);
-
-		document.getElementById("total_rides").innerHTML = all_rides_original.length;
 	}
 };
 
@@ -71,10 +69,16 @@ let populate_passenger_rides = (data) => {
 		rides[date_key].push(ride);
 	}
 	table_body.innerHTML = "";
+	let count = 0;
+
 	const keys = Object.keys(rides);
 	for (let key of keys) {
+		if (rides[key].status !== "taken") {
+			count++;
+		}
 		table_body.innerHTML += fill_ride_data(key, rides[key]);
 	}
+	document.getElementById("total_rides").innerHTML = count;
 
 	Array.from(document.getElementsByClassName("request")).forEach(function (element) {
 		let data = element.getAttribute("ride_id");
