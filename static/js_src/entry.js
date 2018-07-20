@@ -37,6 +37,7 @@ const logout = require("./requires/logout");
 const signup = require("./requires/signup");
 const rides = require("./requires/rides");
 const requests = require("./requires/rides.requests");
+const pass_rides = require("./requires/rides.passenger");
 
 // document event listeners definitions
 
@@ -54,12 +55,15 @@ const ride_list = document.getElementById("rides_list");
 if (login_form){
 	login_form.addEventListener("submit", (form) => login.login(form));
 }
+
 if (signup_form){
 	signup_form.addEventListener("submit", (form) => signup.signup(form));
 }
+
 if (logout_button){
 	logout_button.addEventListener("click", (event) => logout.logout(event));
 }
+
 if (about_button){
 	about_button.addEventListener("click", (event) => {
 		event.preventDefault();
@@ -73,13 +77,23 @@ if (about_button){
 		}
 	});
 }
+
 if (new_offer_form){
 	new_offer_form.addEventListener("submit", (form) => rides.add_ride(form));
 }
+
 if (ride_offers_table){
-	rides.fetch_all_rides();
-	setInterval(rides.fetch_all_rides, 30000);
+	const user = JSON.parse(localStorage.getItem(PROPERTY_USER));
+
+	if (user.user_type === USER_TYPE_DRIVER) {
+		rides.fetch_all_rides();
+		setInterval(rides.fetch_all_rides, 30000);
+	} else {
+		pass_rides.fetch_all_passenger_rides();
+		setInterval(pass_rides.fetch_all_passenger_rides, 30000);
+	}
 }
+
 if (ride_search_form) {
 	ride_search_form.addEventListener("submit", (form) => {
 		form.preventDefault();
@@ -88,12 +102,14 @@ if (ride_search_form) {
 		rides.search_rides(search);
 	});
 }
+
 if (ride_search_field) {
 	ride_search_field.addEventListener("keyup", (event) => {
 		const search = event.target.value;
 		rides.search_rides(search);
 	});
 }
+
 if (ride_requests_table && ride_list){
 
 	ride_list.addEventListener("change", (event) => {
