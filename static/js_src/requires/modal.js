@@ -24,7 +24,7 @@ let prepare_modal = () => {
 			modal.querySelector("#modal-trip-cost").innerText = (data.hasOwnProperty("cost") ? data.cost : 0) + " Ugx";
 			modal.querySelector("#modal-post-date").innerText = data.hasOwnProperty("post_date") ? new Date(data.post_date) : "";
 			modal.querySelector("#modal-depart-date").innerText = data.hasOwnProperty("departure_time") ? new Date(data.departure_time) : "";
-			modal.querySelector("#modal-passenger-contact").innerText = data.hasOwnProperty("passenger_contact") ? data.contact : "";
+			modal.querySelector("#modal-passenger-contact").innerText = data.hasOwnProperty("passenger_contact") ? data.passenger_contact : "";
 			modal.querySelector("#modal-request-date").innerText = data.hasOwnProperty("request_date") ? new Date(data.request_date) : "";
 
 			if (!data.hasOwnProperty("request_date")) { modal.querySelector("#modal-request-date").closest("tr").style.display = "none"; }
