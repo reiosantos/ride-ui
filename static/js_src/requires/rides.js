@@ -1,9 +1,8 @@
-import {formatDateTime, validateAmount, validateDate, validateTime} from "../extras/main";
+import {formatDateTime, sformat, sort_rides, validateAmount, validateDate, validateTime} from "../extras/main";
 import {ADD_AND_RETRIEVE_RIDES_URL} from "../extras/variable_constants";
 import {add_ride_service, fetch_all_rides_service} from "../services/commons.service";
 import {prepare_modal} from "./modal";
 
-let all_rides = [];
 let all_rides_original = [];
 
 let add_ride = (form) => {
@@ -96,15 +95,17 @@ let fetch_all_rides = async () => {
 
 	let response = await fetch_all_rides_service(ADD_AND_RETRIEVE_RIDES_URL);
 
+	let options = `<option value='0'>--------------------------------------------</option>`;
+	let temp_option = `<option value='{0}'>{1}</option>`;
+
 	if (response
 		&& response.hasOwnProperty("data")
 		&& response.data !== false) {
 
-		all_rides.length = 0;
 		all_rides_original.length = 0;
 
-		all_rides.push(...response.data);
 		all_rides_original.push(...response.data);
+		all_rides_original.sort(sort_rides);
 
 		populate_rides(all_rides_original);
 
@@ -115,9 +116,12 @@ let fetch_all_rides = async () => {
 					taken += 1;
 				}
 			}
+			options += sformat(temp_option, [ride.ride_id, `From ${ride.trip_from} - To 
+			${ride.destination}	(${ride.post_date})`]);
 		}
 		document.getElementById("rides_given").innerText = all_rides_original.length;
 		document.getElementById("rides_taken").innerText = taken;
+		document.getElementById("rides_list").innerHTML = options;
 	}
 };
 
