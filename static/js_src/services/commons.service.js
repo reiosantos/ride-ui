@@ -18,9 +18,9 @@ let http_request_service = (URL, method="POST", data={}) => {
 
 	return fetch(URL, options)
 		.then(response => {
-			const regExp = /^2[0-9].*$/;
+			//const regExp = /^2[0-9].*$/;
 
-			if (regExp.test(response.status)) {
+			if (response.status === 200 || response.status === 201) {
 				return Promise.resolve(response);
 			}else {
 				return Promise.reject(response);
@@ -45,10 +45,7 @@ let http_request_service = (URL, method="POST", data={}) => {
 			return data;
 		})
 		.catch(function (error) {
-			if (URL === LOGIN_URL) {
-				return error.json();
-			}
-			if (error.status === 401){
+			if (URL !== LOGIN_URL && error.status === 401){
 				localStorage.clear();
 				location.href = LOGIN_PATH;
 			}
