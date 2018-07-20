@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import {
 	DRIVER_PATH,
 	LOGIN_PATH, PASSENGER_PATH, PROPERTY_AUTH_TOKEN, PROPERTY_USER, SIGNUP_PATH, USER_TYPE_DRIVER, USER_TYPE_PASSENGER,
@@ -86,10 +87,10 @@ if (ride_offers_table){
 	const user = JSON.parse(localStorage.getItem(PROPERTY_USER));
 
 	if (user.user_type === USER_TYPE_DRIVER) {
-		rides.fetch_all_rides();
+		rides.fetch_all_rides().then(() => {});
 		setInterval(rides.fetch_all_rides, 30000);
 	} else {
-		pass_rides.fetch_all_passenger_rides();
+		pass_rides.fetch_all_passenger_rides().then(() => {});
 		setInterval(pass_rides.fetch_all_passenger_rides, 30000);
 	}
 }
@@ -115,7 +116,7 @@ if (ride_requests_table && ride_list){
 	ride_list.addEventListener("change", (event) => {
 		let val = event.target.value;
 		if (val !== "0"){
-			requests.fetch_all_ride_requests(val);
+			requests.fetch_all_ride_requests(val).then(() => {});
 		}
 	});
 }

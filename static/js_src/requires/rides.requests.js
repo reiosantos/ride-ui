@@ -55,7 +55,6 @@ let populate_requests = (data) => {
 	let request_row = (row) => {
 
 		let name = row.hasOwnProperty("passenger_name") ? row.passenger_name : "------------------";
-		let status = row.status;
 		let request_status = row.request_status;
 
 		let temp_patch = `<td style="text-align: right;">
@@ -63,7 +62,7 @@ let populate_requests = (data) => {
 <button class="accept change_request" data='{"status": "accepted", "request_id": "${row.request_id}", "ride_id": "${row.ride_id}"}'>Accept</button></td>`;
 
 		if (request_status === "accepted") {
-			temp_patch = `<td style="text-align: right;">Request already accepted</td>`;
+			temp_patch = "<td style='text-align: right;'>Request already accepted</td>";
 
 		} else if (request_status === "rejected") {
 			temp_patch = `<td style="text-align: right;">Request was rejected 
@@ -121,7 +120,7 @@ let change_request_status = async (status, request_id, ride_id) => {
 		success_panel.innerHTML = response.success_message;
 		success_panel.style.display = "block";
 		error_panel.style.display = "none";
-		fetch_all_ride_requests(ride_id)
+		fetch_all_ride_requests(ride_id).then(() => {});
 
 	} else {
 		response.json().then((response) => {

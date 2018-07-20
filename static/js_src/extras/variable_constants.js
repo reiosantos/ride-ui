@@ -20,6 +20,5 @@ export const UPDATE_RIDE_REQUESTS_URL = `${BASE_URL}/rides/{0}/requests/{1}`;
 
 export const PROPERTY_AUTH_TOKEN = "auth_token";
 export const PROPERTY_USER = "user";
-export const PROPERTY_USER_TYPE = "user_type";
 export const USER_TYPE_DRIVER = "driver";
 export const USER_TYPE_PASSENGER = "passenger";

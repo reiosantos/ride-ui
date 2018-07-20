@@ -76,7 +76,7 @@ let handle_request = async (data, error_panel, success_panel) => {
 		success_panel.innerHTML = response.success_message;
 		success_panel.style.display = "block";
 		error_panel.style.display = "none";
-		fetch_all_rides();
+		fetch_all_rides().then(() => {});
 
 	} else {
 		response.json().then((response) => {
@@ -101,8 +101,8 @@ let fetch_all_rides = async () => {
 
 	let response = await http_service(ADD_AND_RETRIEVE_RIDES_URL, "GET");
 
-	let options = `<option value='0'>--------------------------------------------</option>`;
-	let temp_option = `<option value='{0}'>{1}</option>`;
+	let options = "<option value='0'>--------------------------------------------</option>";
+	let temp_option = "<option value='{0}'>{1}</option>";
 
 	if (response
 		&& response.hasOwnProperty("data")
