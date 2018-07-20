@@ -36,6 +36,7 @@ const login = require("./requires/login");
 const logout = require("./requires/logout");
 const signup = require("./requires/signup");
 const rides = require("./requires/rides");
+const requests = require("./requires/rides.requests");
 
 // document event listeners definitions
 
@@ -47,6 +48,8 @@ const new_offer_form = document.getElementById("form-add-new-offer");
 const ride_offers_table = document.getElementById("rideOffers");
 const ride_search_form = document.getElementById("form-search-offer");
 const ride_search_field = document.getElementById("inputRideLocation");
+const ride_requests_table = document.getElementById("rideRequests");
+const ride_list = document.getElementById("rides_list");
 
 if (login_form){
 	login_form.addEventListener("submit", (form) => login.login(form));
@@ -89,5 +92,15 @@ if (ride_search_field) {
 	ride_search_field.addEventListener("keyup", (event) => {
 		const search = event.target.value;
 		rides.search_rides(search);
+	});
+}
+if (ride_requests_table && ride_list){
+
+	ride_list.addEventListener("change", (event) => {
+		let val = event.target.value;
+		if (val !== "0"){
+			alert(val);
+			requests.fetch_all_ride_requests(val);
+		}
 	});
 }
