@@ -98,10 +98,15 @@
         <div class="col-4">
             <h3 class="title">Customer requests</h3>
 
-            <table class="table bordered">
+            <label for="rides_list">Select a ride</label>
+            <select name="rides_list" class="form-control" id="rides_list">
+                <option value="0">--------------------</option>
+            </select>
+
+            <table class="table bordered" id="rideRequests">
                 <thead>
                 <tr class="totals-green">
-                    <th colspan="2">Total passenger requests: 4</th>
+                    <th colspan="2">Total passenger requests: <i id="total_requests"></i></th>
                 </tr>
                 <tr>
                     <th>Date</th>
@@ -110,42 +115,6 @@
 
                 </thead>
                 <tbody>
-                <tr>
-                    <td>13<sup>th</sup> June 2018</td>
-                    <td>
-                        <table class="table bordered">
-                            <thead>
-                            <tr>
-                                <th>Names</th>
-                                <th>Request</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr class="more-details">
-                                <td>Reio Kazigo</td>
-                                <td>
-                                    <button class="reject">Reject</button>
-                                    <button class="accept">Accept</button>
-                                </td>
-                            </tr>
-                            <tr class="more-details">
-                                <td>Kinene</td>
-                                <td>
-                                    <button class="reject">Reject</button>
-                                    <button class="accept">Accept</button>
-                                </td>
-                            </tr>
-                            <tr class="more-details">
-                                <td>Senoga simon</td>
-                                <td>
-                                    <button class="reject">Reject</button>
-                                    <button class="accept">Accept</button>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </td>
-                </tr>
 
                 </tbody>
 
