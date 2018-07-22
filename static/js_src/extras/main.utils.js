@@ -74,7 +74,7 @@ let validateTime = (time) => {
 				regs[3] = parseInt(regs[3]);
 
 				// 12-hour value between 1 and 12
-				if(regs[1] < 1 || regs[1] > 12) {
+				if(regs[1] < 1 || regs[1] > 23) {
 					alert("Invalid value for hours: " + regs[1]);
 					return false;
 				}
