@@ -69,7 +69,7 @@ select {
     background-color: rgba(227, 231, 238, 0.51);
 }
 
-#signupSuccess, #signupSuccess_1 #signupSuccess_2 {
+#signupSuccess, #signupSuccess_1, #signupSuccess_2 {
     text-align: center;
     margin: auto auto 2em auto;
     display: none;
