@@ -16,7 +16,7 @@
     <div class="header">
         <nav>
             <ul class="navigation put-right">
-                <<li style="background-color: dodgerblue" role="presentation"><a href="index.html"><i class="fa fa-home"></i> Home</a></li>
+                <li style="background-color: dodgerblue" role="presentation"><a href="index.html"><i class="fa fa-home"></i> Home</a></li>
                 <li style="background-color: dodgerblue" role="presentation"><a href="../about.html"><i class="fa fa-info"></i> About Us</a></li>
                 <li style="background-color: firebrick" id="logout" role="presentation">
                     <a href="#"><i class="fa fa-sign-out"></i> Logout</a></li>
@@ -31,10 +31,15 @@
         <div class="col-6">
             <h3 class="title">Rides taken</h3>
 
-            <table class="table bordered">
+            <label for="rides_list">Select a ride to see your requests</label>
+            <select name="rides_list" class="form-control" id="rides_list">
+                <option value="0">--------------------</option>
+            </select>
+
+            <table class="table bordered" id="rideRequests">
                 <thead>
                 <tr class="totals">
-                    <th>Rides taken: 3</th>
+                    <th>Rides taken: <i id="rides_taken"></i></th>
                 </tr>
                 <tr>
                     <th>Date</th>
@@ -43,53 +48,8 @@
 
                 </thead>
                 <tbody>
-                <tr>
-                    <td>4<sup>th</sup> June 2018</td>
-                    <td>
-                        <table class="table bordered">
-                            <thead>
-                            <tr>
-                                <th>To</th>
-                                <th>Cost</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr class="more-details">
-                                <td>Namagunga</td>
-                                <td>3000</td>
-                            </tr>
-                            <tr class="more-details">
-                                <td>Kasubi</td>
-                                <td>23000</td>
-                            </tr>
-                            <tr class="more-details">
-                                <td>Nakulabye</td>
-                                <td>3000</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </td>
-                </tr>
 
-                <tr>
-                    <td>1<sup>st</sup> June 2018</td>
-                    <td>
-                        <table class="table bordered">
-                            <thead>
-                            <tr>
-                                <th>To</th>
-                                <th>Cost</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr class="more-details">
-                                <td>Nakulabye</td>
-                                <td>3000</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </td>
-                </tr>
+                <tr><td><h3>Select rides form the drop-down above</h3></td></tr>
 
                 </tbody>
 
@@ -110,6 +70,8 @@
                 </tr>
                 </thead>
                 <tbody>
+
+                <tr><td><h3>No offers have been made yet</h3></td></tr>
 
                 </tbody>
 
@@ -169,7 +131,7 @@
                 </tr>
                 <tr>
                     <td>Cost:</td>
-                    <td id="modal-trip-cost">Cost: ~3000 Ush</td>
+                    <td id="modal-trip-cost"></td>
                 </tr>
                 <tr>
                     <td>Departure Date:</td>
