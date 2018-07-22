@@ -3,11 +3,11 @@ import {POST_FETCH_RIDE_REQUESTS_URL, PROPERTY_USER} from "../extras/constant.va
 import {sformat} from "../extras/main.utils";
 import {prepare_modal} from "./modal";
 
-let all_requests = [];
-
 let fetch_all_ride_requests = async (ride_id) => {
 
 	let response = await http_service(sformat(POST_FETCH_RIDE_REQUESTS_URL, [ride_id]), "GET");
+
+	let all_requests = [];
 
 	if (response
 		&& response.hasOwnProperty("data")
@@ -15,7 +15,11 @@ let fetch_all_ride_requests = async (ride_id) => {
 
 		all_requests.length = 0;
 
-		all_requests.push(...response.data);
+		if (Array.isArray(response.data)){
+			all_requests.push(...response.data);
+		}else{
+			all_requests.push(response.data);
+		}
 
 		populate_requests(all_requests);
 	} else {

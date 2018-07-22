@@ -3,8 +3,6 @@ import {ADD_AND_RETRIEVE_RIDES_URL, DELETE_RIDE_URL, UPDATE_RIDE_REQUESTS_URL} f
 import {http_service} from "../services/commons.service";
 import {prepare_modal} from "./modal";
 
-let all_rides_original = [];
-
 let add_ride = (form) => {
 
 	form.preventDefault();
@@ -100,6 +98,7 @@ let handle_request = async (data, error_panel, success_panel) => {
 let fetch_all_rides = async () => {
 
 	let response = await http_service(ADD_AND_RETRIEVE_RIDES_URL, "GET");
+	let all_rides_original = [];
 
 	let options = "<option value='0'>--------------------------------------------</option>";
 	let temp_option = "<option value='{0}'>{1}</option>";
@@ -110,7 +109,11 @@ let fetch_all_rides = async () => {
 
 		all_rides_original.length = 0;
 
-		all_rides_original.push(...response.data);
+		if (Array.isArray(response.data)){
+			all_rides_original.push(...response.data);
+		}else{
+			all_rides_original.push(response.data);
+		}
 		all_rides_original.sort(sort_rides);
 
 		populate_rides(all_rides_original);

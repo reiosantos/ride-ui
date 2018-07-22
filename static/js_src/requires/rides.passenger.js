@@ -3,14 +3,13 @@ import {ADD_AND_RETRIEVE_RIDES_URL, POST_FETCH_RIDE_REQUESTS_URL} from "../extra
 import {sformat, sort_rides} from "../extras/main.utils";
 import {prepare_modal} from "./modal";
 
-let all_rides_original = [];
-
 let fetch_all_passenger_rides = async () => {
 
 	let options = "<option value='0'>--------------------------------------------</option>";
 	let temp_option = "<option value='{0}'>{1}</option>";
 
 	let response = await http_service(ADD_AND_RETRIEVE_RIDES_URL, "GET");
+	let all_rides_original = [];
 
 	if (response
 		&& response.hasOwnProperty("data")
@@ -18,7 +17,11 @@ let fetch_all_passenger_rides = async () => {
 
 		all_rides_original.length = 0;
 
-		all_rides_original.push(...response.data);
+		if (Array.isArray(response.data)){
+			all_rides_original.push(...response.data);
+		}else{
+			all_rides_original.push(response.data);
+		}
 		all_rides_original.sort(sort_rides);
 
 		for (let ride of all_rides_original) {
@@ -107,7 +110,7 @@ let send_request = async (ride_id) => {
 	error_panel.style.display = "none";
 	success_panel.style.display = "none";
 
-	let response = await http_service(sformat(POST_FETCH_RIDE_REQUESTS_URL, [ride_id]), "POST");
+	let response = await http_service(sformat(POST_FETCH_RIDE_REQUESTS_URL, [ride_id]), "P");
 
 	if (response && response.hasOwnProperty("success_message")) {
 

@@ -3,9 +3,9 @@ import {POST_FETCH_RIDE_REQUESTS_URL, UPDATE_RIDE_REQUESTS_URL} from "../extras/
 import {sformat} from "../extras/main.utils";
 import {prepare_modal} from "./modal";
 
-let all_requests = [];
-
 let fetch_all_ride_requests = async (ride_id) => {
+
+	let all_requests = [];
 
 	let error_panel = document.getElementById("loginError_1");
 	let success_panel = document.getElementById("signupSuccess_1");
@@ -19,9 +19,12 @@ let fetch_all_ride_requests = async (ride_id) => {
 		&& response.hasOwnProperty("data")
 		&& response.data !== false) {
 
-		all_requests.length = 0;
+		if (Array.isArray(response.data)){
+			all_requests.push(...response.data);
+		}else{
+			all_requests.push(response.data);
+		}
 
-		all_requests.push(...response.data);
 		document.getElementById("total_requests").innerText = all_requests.length;
 
 		populate_requests(all_requests);
@@ -75,7 +78,6 @@ let populate_requests = (data) => {
                                 ${temp_patch}
                             </tr>`;
 	};
-
 	let rides = {};
 	for (let ride of  data) {
 		let date_key = ride.post_date.split(" ")[0];
