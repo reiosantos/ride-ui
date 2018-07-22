@@ -26,7 +26,8 @@ let fetch_all_ride_requests = async (ride_id) => {
 
 		populate_requests(all_requests);
 	} else {
-		document.getElementById("rideRequests").querySelector("tbody").innerHTML = "";
+		document.getElementById("rideRequests").querySelector("tbody").innerHTML =
+			"<tr><td colspan='2'>No request has been made on this ride</td></tr>";
 	}
 };
 
