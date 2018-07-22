@@ -107,7 +107,7 @@ let send_request = async (ride_id) => {
 	error_panel.style.display = "none";
 	success_panel.style.display = "none";
 
-	let response = await http_service(sformat(POST_FETCH_RIDE_REQUESTS_URL, [ride_id]), "PUT");
+	let response = await http_service(sformat(POST_FETCH_RIDE_REQUESTS_URL, [ride_id]), "POST");
 
 	if (response && response.hasOwnProperty("success_message")) {
 
