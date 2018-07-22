@@ -1,5 +1,5 @@
 
-import {LOGOUT_URL, WELCOME_PATH} from "../extras/variable_constants";
+import {LOGOUT_URL, WELCOME_PATH} from "../extras/constant.variables";
 import {http_service} from "../services/commons.service";
 
 let logout = async (event) => {

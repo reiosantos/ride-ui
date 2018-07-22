@@ -1,5 +1,5 @@
-import {validatePassword} from "../extras/main";
-import {LOGIN_URL, PROPERTY_USER, USER_TYPE_DRIVER, USER_TYPE_PASSENGER} from "../extras/variable_constants";
+import {validatePassword} from "../extras/main.utils";
+import {LOGIN_URL, PROPERTY_USER, USER_TYPE_DRIVER, USER_TYPE_PASSENGER} from "../extras/constant.variables";
 import {http_service} from "../services/commons.service";
 
 let login = async (form) => {

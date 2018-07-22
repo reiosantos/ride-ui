@@ -1,5 +1,5 @@
-import {formatDateTime, sformat, sort_rides, validateAmount, validateDate, validateTime} from "../extras/main";
-import {ADD_AND_RETRIEVE_RIDES_URL} from "../extras/variable_constants";
+import {formatDateTime, sformat, sort_rides, validateAmount, validateDate, validateTime} from "../extras/main.utils";
+import {ADD_AND_RETRIEVE_RIDES_URL} from "../extras/constant.variables";
 import {http_service} from "../services/commons.service";
 import {prepare_modal} from "./modal";
 

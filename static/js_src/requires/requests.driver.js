@@ -1,6 +1,6 @@
 import {http_service} from "../services/commons.service";
-import {POST_FETCH_RIDE_REQUESTS_URL, UPDATE_RIDE_REQUESTS_URL} from "../extras/variable_constants";
-import {sformat} from "../extras/main";
+import {POST_FETCH_RIDE_REQUESTS_URL, UPDATE_RIDE_REQUESTS_URL} from "../extras/constant.variables";
+import {sformat} from "../extras/main.utils";
 import {prepare_modal} from "./modal";
 
 let all_requests = [];

@@ -2,7 +2,7 @@
 import {
 	HEADERS, LOGIN_PATH, LOGIN_URL, LOGOUT_URL, PROPERTY_AUTH_TOKEN,
 	PROPERTY_USER
-} from "../extras/variable_constants";
+} from "../extras/constant.variables";
 
 let http_request_service = (URL, method="POST", data={}) => {
 
