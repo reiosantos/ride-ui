@@ -1,11 +1,14 @@
 import {http_service} from "../services/commons.service";
-import {ADD_AND_RETRIEVE_RIDES_URL, POST_FETCH_RIDE_REQUESTS_URL} from "../extras/variable_constants";
-import {sformat, sort_rides} from "../extras/main";
+import {ADD_AND_RETRIEVE_RIDES_URL, POST_FETCH_RIDE_REQUESTS_URL} from "../extras/constant.variables";
+import {sformat, sort_rides} from "../extras/main.utils";
 import {prepare_modal} from "./modal";
 
 let all_rides_original = [];
 
 let fetch_all_passenger_rides = async () => {
+
+	let options = "<option value='0'>--------------------------------------------</option>";
+	let temp_option = "<option value='{0}'>{1}</option>";
 
 	let response = await http_service(ADD_AND_RETRIEVE_RIDES_URL, "GET");
 
@@ -17,6 +20,12 @@ let fetch_all_passenger_rides = async () => {
 
 		all_rides_original.push(...response.data);
 		all_rides_original.sort(sort_rides);
+
+		for (let ride of all_rides_original) {
+			options += sformat(temp_option, [ride.ride_id, `From ${ride.trip_from} - To 
+			${ride.destination}	(${ride.post_date})`]);
+		}
+		document.getElementById("rides_list").innerHTML = options;
 
 		populate_passenger_rides(all_rides_original);
 	}
