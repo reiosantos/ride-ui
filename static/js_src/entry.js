@@ -3,7 +3,7 @@ import {
 	DRIVER_PATH,
 	LOGIN_PATH, PASSENGER_PATH, PROPERTY_AUTH_TOKEN, PROPERTY_USER, SIGNUP_PATH, USER_TYPE_DRIVER, USER_TYPE_PASSENGER,
 	WELCOME_PATH
-} from "./extras/variable_constants";
+} from "./extras/constant.variables";
 
 if (location.pathname !== LOGIN_PATH
 	&& location.pathname !== SIGNUP_PATH
@@ -36,9 +36,10 @@ if (location.pathname !== LOGIN_PATH
 const login = require("./requires/login");
 const logout = require("./requires/logout");
 const signup = require("./requires/signup");
-const rides = require("./requires/rides");
-const requests = require("./requires/rides.requests");
-const pass_rides = require("./requires/rides.passenger");
+const driver_rides = require("./requires/rides.driver");
+const driver_requests = require("./requires/requests.driver");
+const passenger_rides = require("./requires/rides.passenger");
+const passenger_requests = require("./requires/requests.passenger");
 
 // document event listeners definitions
 
@@ -80,18 +81,18 @@ if (about_button){
 }
 
 if (new_offer_form){
-	new_offer_form.addEventListener("submit", (form) => rides.add_ride(form));
+	new_offer_form.addEventListener("submit", (form) => driver_rides.add_ride(form));
 }
 
 if (ride_offers_table){
 	const user = JSON.parse(localStorage.getItem(PROPERTY_USER));
 
 	if (user.user_type === USER_TYPE_DRIVER) {
-		rides.fetch_all_rides().then(() => {});
-		setInterval(rides.fetch_all_rides, 30000);
+		driver_rides.fetch_all_rides().then(() => {});
+		setInterval(driver_rides.fetch_all_rides, 30000);
 	} else {
-		pass_rides.fetch_all_passenger_rides().then(() => {});
-		setInterval(pass_rides.fetch_all_passenger_rides, 30000);
+		passenger_rides.fetch_all_passenger_rides().then(() => {});
+		setInterval(passenger_rides.fetch_all_passenger_rides, 30000);
 	}
 }
 
@@ -100,23 +101,29 @@ if (ride_search_form) {
 		form.preventDefault();
 		form  = form.target;
 		const search = form.inputRideLocation.value;
-		rides.search_rides(search);
+		driver_rides.search_rides(search);
 	});
 }
 
 if (ride_search_field) {
 	ride_search_field.addEventListener("keyup", (event) => {
 		const search = event.target.value;
-		rides.search_rides(search);
+		driver_rides.search_rides(search);
 	});
 }
 
 if (ride_requests_table && ride_list){
 
+	const user = JSON.parse(localStorage.getItem(PROPERTY_USER));
+
 	ride_list.addEventListener("change", (event) => {
 		let val = event.target.value;
 		if (val !== "0"){
-			requests.fetch_all_ride_requests(val).then(() => {});
+			if (user && user.user_type === USER_TYPE_DRIVER) {
+				driver_requests.fetch_all_ride_requests(val).then(() => {});
+			} else {
+				passenger_requests.fetch_all_ride_requests(val).then(() => {});
+			}
 		}
 	});
 }
