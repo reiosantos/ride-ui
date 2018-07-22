@@ -1,5 +1,5 @@
 import {formatDateTime, sformat, sort_rides, validateAmount, validateDate, validateTime} from "../extras/main.utils";
-import {ADD_AND_RETRIEVE_RIDES_URL} from "../extras/constant.variables";
+import {ADD_AND_RETRIEVE_RIDES_URL, DELETE_RIDE_URL, UPDATE_RIDE_REQUESTS_URL} from "../extras/constant.variables";
 import {http_service} from "../services/commons.service";
 import {prepare_modal} from "./modal";
 
@@ -155,10 +155,10 @@ let populate_rides = (data) => {
 
 		return `<tr>
                     <td class="post_date">${new Date(date).toDateString()}</td>
-                    <td colspan="3">
+                    <td colspan="4">
                         <table class="table bordered">
                         
-                            <thead><tr><th>From</th><th>Destination</th><th>Status</th></tr></thead>
+                            <thead><tr><th>From</th><th>Destination</th><th>Status</th><th></th></tr></thead>
                             
                             <tbody>
                             
@@ -180,6 +180,7 @@ let populate_rides = (data) => {
                                 <td>${name}</td>
                                 <td>${destination}</td>
                                 <td class="${status}">${status.charAt(0).toUpperCase()}${status.slice(1)}</td>
+                                <td class="delete_ride"data="${row.ride_id}"><button style="color: red">Delete <i class="fa fa-trash-o"></i> </button></td>
                             </tr>`;
 	};
 
@@ -197,7 +198,52 @@ let populate_rides = (data) => {
 	for (let key of keys) {
 		table_body.innerHTML += fill_ride_data(key, rides[key]);
 	}
+
+	Array.from(document.getElementsByClassName("delete_ride")).forEach(function (element) {
+		let ride_id = element.getAttribute("data");
+		element.addEventListener("click", delete_ride.bind(null, ride_id));
+	});
+
 	prepare_modal();
+};
+
+let delete_ride = async (ride_id) => {
+
+	if (!confirm("Are you sure you want to delete this ride?")) {
+		return false;
+	}
+
+	let error_panel = document.getElementById("loginError_2");
+	let success_panel = document.getElementById("signupSuccess_2");
+
+	error_panel.style.display = "none";
+	success_panel.style.display = "none";
+
+	let data = {
+		status: status
+	};
+	let response = await http_service(sformat(DELETE_RIDE_URL, [ride_id]), "DELETE", data);
+
+	if (response && response.hasOwnProperty("success_message")) {
+
+		success_panel.innerHTML = response.success_message;
+		success_panel.style.display = "block";
+		error_panel.style.display = "none";
+		fetch_all_rides().then(() => {});
+
+	} else {
+		response.json().then((response) => {
+			if (response.hasOwnProperty("error_message")) {
+
+				error_panel.innerHTML = `${response.error_message} <br> - ${response.data}`;
+				error_panel.style.display = "block";
+
+			} else {
+				error_panel.innerHTML = "Unknown error. consult the administrator";
+				error_panel.style.display = "block";
+			}
+		});
+	}
 };
 
 module.exports = {
