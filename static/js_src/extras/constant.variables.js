@@ -3,11 +3,15 @@ export const HEADERS = {
 	"Accept": "application/json",
 	"Content-type":"application/json"
 };
-export const LOGIN_PATH = "/templates/login.html";
-export const SIGNUP_PATH = "/templates/signup.html";
-export const WELCOME_PATH = "/index.html";
-export const PASSENGER_PATH = "/templates/passenger/index.html";
-export const DRIVER_PATH = "/templates/driver/index.html";
+let PREFIX = "";
+if (location.host === "reiosantos.github.io") {
+	PREFIX = "/ride-ui";
+}
+export const LOGIN_PATH = `${PREFIX}/templates/login.html`;
+export const SIGNUP_PATH = `${PREFIX}/templates/signup.html`;
+export const WELCOME_PATH = `${PREFIX}/index.html`;
+export const PASSENGER_PATH = `${PREFIX}/templates/passenger/index.html`;
+export const DRIVER_PATH = `${PREFIX}/templates/driver/index.html`;
 
 export const BASE_URL = "https://ride-api-3.herokuapp.com/api/v1";
 
