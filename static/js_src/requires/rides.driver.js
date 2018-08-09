@@ -95,10 +95,11 @@ let handle_request = async (data, error_panel, success_panel) => {
 	return true;
 };
 
+let all_rides_original = [];
+
 let fetch_all_rides = async () => {
 
 	let response = await http_service(ADD_AND_RETRIEVE_RIDES_URL, "GET");
-	let all_rides_original = [];
 
 	let options = "<option value='0'>--------------------------------------------</option>";
 	let temp_option = "<option value='{0}'>{1}</option>";
