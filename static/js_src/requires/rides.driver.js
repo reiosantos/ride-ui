@@ -1,5 +1,5 @@
 import {formatDateTime, sformat, sort_rides, validateAmount, validateDate, validateTime} from "../extras/main.utils";
-import {ADD_AND_RETRIEVE_RIDES_URL, DELETE_RIDE_URL, UPDATE_RIDE_REQUESTS_URL} from "../extras/constant.variables";
+import {ADD_AND_RETRIEVE_RIDES_URL, DELETE_RIDE_URL} from "../extras/constant.variables";
 import {http_service} from "../services/commons.service";
 import {prepare_modal} from "./modal";
 
@@ -67,7 +67,20 @@ let add_ride = (form) => {
 
 let handle_request = async (data, error_panel, success_panel) => {
 
+    let loader = document.getElementById("gif_loader");
+    let button = document.getElementById('btnAddOffer');
+
+    if (loader) {
+        loader.style.display = "block";
+        button.style.display = 'none';
+    }
+
 	let response = await http_service(ADD_AND_RETRIEVE_RIDES_URL, "POST", data);
+
+    if (loader) {
+        loader.style.display = "none";
+        button.style.display = 'block';
+    }
 
 	if (response && response.hasOwnProperty("success_message")) {
 
@@ -217,6 +230,9 @@ let delete_ride = async (ride_id) => {
 		return false;
 	}
 
+    let loader = document.getElementById("gif_loader_delete");
+    let buttons = document.getElementById("rideOffers").querySelector("tbody").querySelector("button");
+
 	let error_panel = document.getElementById("loginError_2");
 	let success_panel = document.getElementById("signupSuccess_2");
 
@@ -226,7 +242,18 @@ let delete_ride = async (ride_id) => {
 	let data = {
 		status: status
 	};
+
+    if (loader) {
+        loader.style.display = "block";
+        Array.from(buttons, (ele) => ele.style.display = "none")
+    }
+
 	let response = await http_service(sformat(DELETE_RIDE_URL, [ride_id]), "DELETE", data);
+
+    if (loader) {
+        loader.style.display = "none";
+        Array.from(buttons, (ele) => ele.style.display = "block");
+    }
 
 	if (response && response.hasOwnProperty("success_message")) {
 

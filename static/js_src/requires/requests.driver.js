@@ -9,11 +9,20 @@ let fetch_all_ride_requests = async (ride_id) => {
 
 	let error_panel = document.getElementById("loginError_1");
 	let success_panel = document.getElementById("signupSuccess_1");
+    let loader = document.getElementById("gif_loader_table");
 
 	error_panel.style.display = "none";
 	success_panel.style.display = "none";
 
+    if (loader) {
+        loader.style.display = "block";
+    }
+
 	let response = await http_service(sformat(POST_FETCH_RIDE_REQUESTS_URL, [ride_id]), "GET");
+
+    if (loader) {
+        loader.style.display = "none";
+    }
 
 	if (response
 		&& response.hasOwnProperty("data")
@@ -109,6 +118,8 @@ let change_request_status = async (status, request_id, ride_id) => {
 
 	let error_panel = document.getElementById("loginError_1");
 	let success_panel = document.getElementById("signupSuccess_1");
+    const buttons = document.getElementById("rideRequests").querySelector("tbody").querySelector("button");
+    let loader = document.getElementById("gif_loader_table");
 
 	error_panel.style.display = "none";
 	success_panel.style.display = "none";
@@ -116,7 +127,18 @@ let change_request_status = async (status, request_id, ride_id) => {
 	let data = {
 		status: status
 	};
+
+    if (loader) {
+        loader.style.display = "block";
+        Array.from(buttons, (ele) => ele.style.display = "none")
+    }
+
 	let response = await http_service(sformat(UPDATE_RIDE_REQUESTS_URL, [ride_id, request_id]), "PUT", data);
+
+    if (loader) {
+        loader.style.display = "none";
+        Array.from(buttons, (ele) => ele.style.display = "block");
+    }
 
 	if (response && response.hasOwnProperty("success_message")) {
 

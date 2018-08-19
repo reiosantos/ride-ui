@@ -13,6 +13,8 @@ let login = async (form) => {
 	let error_panel = document.getElementById("loginError");
 	let username_error = document.getElementById("usernameError");
 	let password_error = document.getElementById("passwordError");
+    let loader = document.getElementById("gif_loader");
+    let button = document.getElementById('btnSignIn');
 
 	username_error.style.display = "none";
 	password_error.style.display = "none";
@@ -25,7 +27,19 @@ let login = async (form) => {
 				username: username.value,
 				password: password.value
 			};
+
+            if (loader) {
+                loader.style.display = "block";
+                button.style.display = 'none';
+            }
+
 			let response = await http_service(LOGIN_URL, "POST", data);
+
+            if (loader) {
+                loader.style.display = "none";
+                button.style.display = 'block';
+            }
+
 			if (typeof response === "boolean" && response) {
 				let user = JSON.parse(localStorage.getItem(PROPERTY_USER));
 

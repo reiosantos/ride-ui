@@ -107,10 +107,23 @@ let send_request = async (ride_id) => {
 	let error_panel = document.getElementById("loginError");
 	let success_panel = document.getElementById("signupSuccess");
 
+    let loader = document.getElementById("gif_loader_request");
+    let buttons = document.getElementById("rideOffers").querySelector("tbody").querySelector("button");
+
 	error_panel.style.display = "none";
 	success_panel.style.display = "none";
 
-	let response = await http_service(sformat(POST_FETCH_RIDE_REQUESTS_URL, [ride_id]), "P");
+    if (loader) {
+        loader.style.display = "block";
+        Array.from(buttons, (ele) => ele.style.display = "none")
+    }
+
+    let response = await http_service(sformat(POST_FETCH_RIDE_REQUESTS_URL, [ride_id]), "POST");
+
+    if (loader) {
+        loader.style.display = "none";
+        Array.from(buttons, (ele) => ele.style.display = "block")
+    }
 
 	if (response && response.hasOwnProperty("success_message")) {
 

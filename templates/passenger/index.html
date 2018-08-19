@@ -31,6 +31,11 @@
         <div class="col-6">
             <h3 class="title">Rides taken</h3>
 
+            <p id="gif_loader_table"
+               style="display: none; border-radius: 15px; color: green; background: #fefefe; text-align: center;">
+                <img src="../../static/images/loader.gif"/> Loading...
+            </p>
+
             <label for="rides_list">Select a ride to see your requests</label>
             <select name="rides_list" class="form-control" id="rides_list">
                 <option value="0">--------------------</option>
@@ -62,6 +67,11 @@
 
             <span id="loginError"></span>
             <span id="signupSuccess"></span>
+
+            <p id="gif_loader_request"
+               style="display: none; border-radius: 15px; color: green; background: #fefefe; text-align: center;">
+                <img src="../../static/images/loader.gif"/> Loading...
+            </p>
 
             <table class="table bordered" id="rideOffers">
                 <thead>

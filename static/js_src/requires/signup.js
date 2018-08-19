@@ -19,6 +19,8 @@ let signup = async (form) => {
 	let password_error = document.getElementById("passwordError");
 	let name_error = document.getElementById("nameError");
 	let contact_error = document.getElementById("contactError");
+    let loader = document.getElementById("gif_loader");
+    let button = document.getElementById('btnSignUp');
 
 	username_error.style.display = "none";
 	password_error.style.display = "none";
@@ -39,7 +41,18 @@ let signup = async (form) => {
 						username: username.value,
 						password: password.value
 					};
+
+                    if (loader) {
+                        loader.style.display = "block";
+                        button.style.display = 'none';
+                    }
+
 					let response = await http_service(SIGNUP_URL, "POST", data);
+
+                    if (loader) {
+                        loader.style.display = "none";
+                        button.style.display = 'block';
+                    }
 
 					if (response && response.hasOwnProperty("success_message")) {
 

@@ -5,7 +5,17 @@ import {prepare_modal} from "./modal";
 
 let fetch_all_ride_requests = async (ride_id) => {
 
+    let loader = document.getElementById("gif_loader_table");
+
+    if (loader) {
+        loader.style.display = "block";
+    }
+
 	let response = await http_service(sformat(POST_FETCH_RIDE_REQUESTS_URL, [ride_id]), "GET");
+
+    if (loader) {
+        loader.style.display = "none";
+    }
 
 	let all_requests = [];
 
