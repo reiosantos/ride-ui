@@ -13,8 +13,8 @@ export const WELCOME_PATH = `${PREFIX}/index.html`;
 export const PASSENGER_PATH = `${PREFIX}/templates/passenger/index.html`;
 export const DRIVER_PATH = `${PREFIX}/templates/driver/index.html`;
 
-// export const BASE_URL = "https://ride-api-3.herokuapp.com/api/v1";
-export const BASE_URL = "http://127.0.0.1:5000/api/v1";
+export const BASE_URL = "https://ride-api-3.herokuapp.com/api/v1";
+// export const BASE_URL = "http://127.0.0.1:5000/api/v1";
 
 export const LOGIN_URL = `${BASE_URL}/auth/login`;
 export const LOGOUT_URL = `${BASE_URL}/auth/logout`;
