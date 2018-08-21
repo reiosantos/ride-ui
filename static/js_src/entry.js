@@ -1,8 +1,14 @@
 /* eslint-disable no-undef */
 import {
-	DRIVER_PATH,
-	LOGIN_PATH, PASSENGER_PATH, PROPERTY_AUTH_TOKEN, PROPERTY_USER, SIGNUP_PATH, USER_TYPE_DRIVER, USER_TYPE_PASSENGER,
-	WELCOME_PATH
+    DRIVER_PATH,
+    LOGIN_PATH,
+    PASSENGER_PATH,
+    PROPERTY_AUTH_TOKEN,
+    PROPERTY_USER,
+    SIGNUP_PATH,
+    USER_TYPE_DRIVER,
+    USER_TYPE_PASSENGER,
+    WELCOME_PATH
 } from "./extras/constant.variables";
 
 if (location.pathname !== LOGIN_PATH
@@ -48,7 +54,7 @@ const signup_form = document.getElementById("form-sign-up");
 const logout_button = document.getElementById("logout");
 const about_button = document.getElementById("about");
 const new_offer_form = document.getElementById("form-add-new-offer");
-const ride_offers_table = document.getElementById("rideOffers");
+const ride_offers_table = document.getElementById("rideOffersDivs");
 const ride_search_form = document.getElementById("form-search-offer");
 const ride_search_field = document.getElementById("inputRideLocation");
 const ride_requests_table = document.getElementById("rideRequests");

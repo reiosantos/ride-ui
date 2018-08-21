@@ -36,27 +36,17 @@ let fetch_all_passenger_rides = async () => {
 
 let populate_passenger_rides = (data) => {
 
-	let table_body = document.getElementById("rideOffers").querySelector("tbody");
+    // let table_body = document.getElementById("rideOffers").querySelector("tbody");
+    let ride_offers_divs = document.getElementById("rideOffersDivs");
 
 	let fill_ride_data = (date, rows) => {
 
-		return `<tr>
-                    <td>
-                        <table class="table bordered">
-                        
-                            <thead>
-                            <tr><th>From</th><th>Destination</th><th>Status</th></tr>
-                            <tr><th style="text-align: center;" colspan="3">Offer date: ${new Date(date).toDateString()}</th></tr>
-                            </thead>
-                            
-                            <tbody>
-                            
-                            ${rows.map(ride_rows).join("")}
-                            
-                            </tbody>
-                        </table>
-                    </td>
-                </tr>`;
+        return `<div style="width: auto; background: #fefefe; border-radius: 2px; padding: .3em; margin: .2em; float: none; border: 1px solid red">
+                    Rides Offered on (${new Date(date).toDateString()})
+                </div>
+                <div class="grid">
+                	${rows.map(ride_rows).join("")}
+				</div>`;
 	};
 
 	let ride_rows = (row) => {
@@ -65,13 +55,9 @@ let populate_passenger_rides = (data) => {
 			return "";
 		}
 
-		let temp_patch = `<td style="text-align: right;"><button class="accept request" ride_id="${row.ride_id}">send request</button></td>`;
-
-		return `<tr class="more-details" data='${JSON.stringify(row)}'>
-                                <td>${row.trip_from}</td>
-                                <td>${row.destination}</td>
-                                ${temp_patch}
-                            </tr>`;
+        return `<div class="more-details z-depth-3" data='${JSON.stringify(row)}'><cite> To:${row.destination} <br> From:${row.trip_from}
+                        <button class="accept request" ride_id="${row.ride_id}" >Send Request <i class="fa fa-send-o"></i></button>
+                    </cite></div>`;
 	};
 
 	let rides = {};
@@ -83,17 +69,19 @@ let populate_passenger_rides = (data) => {
 		}
 		rides[date_key].push(ride);
 	}
-	table_body.innerHTML = "";
+    ride_offers_divs.innerHTML = "";
 	let count = 0;
 
 	const keys = Object.keys(rides);
 	for (let key of keys) {
-		if (rides[key].status !== "taken") {
-			count++;
-		}
-		table_body.innerHTML += fill_ride_data(key, rides[key]);
-	}
-	document.getElementById("total_rides").innerHTML = count;
+        for (let ri of rides[key]) {
+            if (ri.status !== "taken") {
+                count++;
+            }
+        }
+        ride_offers_divs.innerHTML += fill_ride_data(key, rides[key]);
+    }
+    document.getElementById("total_rides").innerHTML = count.toString();
 
 	Array.from(document.getElementsByClassName("request")).forEach(function (element) {
 		let data = element.getAttribute("ride_id");
@@ -108,7 +96,7 @@ let send_request = async (ride_id) => {
 	let success_panel = document.getElementById("signupSuccess");
 
     let loader = document.getElementById("gif_loader_request");
-    let buttons = document.getElementById("rideOffers").querySelector("tbody").querySelector("button");
+    let buttons = document.getElementById("rideOffersDivs").querySelector("button");
 
 	error_panel.style.display = "none";
 	success_panel.style.display = "none";

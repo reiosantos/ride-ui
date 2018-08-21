@@ -67,7 +67,8 @@ table {
 }
 
 .available {
-    color: #a1fc5e;
+    #color: #a1fc5e;
+    color: dodgerblue;
 }
 
 .totals {

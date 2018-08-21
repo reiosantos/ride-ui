@@ -95,6 +95,7 @@ let populate_requests = (data) => {
 	for (let key of keys) {
 		table_body.innerHTML += fill_request_data(key, rides[key]);
 	}
+    document.getElementById("rides_taken").innerText = keys.length;
 
 	prepare_modal();
 };

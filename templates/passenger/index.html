@@ -8,6 +8,7 @@
     <link href="../../static/css/signup.css" rel="stylesheet">
     <link href="../../static/css/modal.css" rel="stylesheet">
     <link href="../../static/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="../../static/css/grid.css" rel="stylesheet">
 
 </head>
 
@@ -73,19 +74,13 @@
                 <img src="../../static/images/loader.gif"/> Loading...
             </p>
 
-            <table class="table bordered" id="rideOffers">
-                <thead>
-                <tr class="totals-green">
-                    <th>Total: <i id="total_rides"></i></th>
-                </tr>
-                </thead>
-                <tbody>
+            <div class="totals" style="width: auto; border-radius: 2px; padding: .1em .9em; margin: .2em; float: none">
+                <p>Total rides: <i id="total_rides"></i></p>
+            </div>
 
-                <tr><td><h3>No offers have been made yet</h3></td></tr>
-
-                </tbody>
-
-            </table>
+            <div id="rideOffersDivs" style="width: auto">
+                <h3>No offers have been made yet</h3>
+            </div>
 
         </div>
 
