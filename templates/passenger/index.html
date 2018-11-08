@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Ride my way</title>
+
+    <link href="../../static/css/main.css" rel="stylesheet">
+    <link href="../../static/css/home.css" rel="stylesheet">
+    <link href="../../static/css/signup.css" rel="stylesheet">
+    <link href="../../static/css/modal.css" rel="stylesheet">
+    <link href="../../static/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="../../static/css/grid.css" rel="stylesheet">
+
+</head>
+
+<body>
+<div class="container transparent">
+    <div class="header">
+        <nav>
+            <ul class="navigation put-right">
+                <li style="background-color: dodgerblue" role="presentation"><a href="index.html"><i class="fa fa-home"></i> Home</a></li>
+                <li style="background-color: dodgerblue" role="presentation"><a href="../about.html"><i class="fa fa-info"></i> About Us</a></li>
+                <li style="background-color: firebrick" id="logout" role="presentation">
+                    <a href="#"><i class="fa fa-sign-out"></i> Logout</a></li>
+            </ul>
+        </nav>
+        <h3 class="text-muted">Ride My Way (RMW)</h3>
+        <h4 class="text-muted">Respond to offers</h4>
+    </div>
+
+    <div class="one-row">
+
+        <div class="col-6">
+            <h3 class="title">Rides taken</h3>
+
+            <p id="gif_loader_table"
+               style="display: none; border-radius: 15px; color: green; background: #fefefe; text-align: center;">
+                <img src="../../static/images/loader.gif"/> Loading...
+            </p>
+
+            <label for="rides_list">Select a ride to see your requests</label>
+            <select name="rides_list" class="form-control" id="rides_list">
+                <option value="0">--------------------</option>
+            </select>
+
+            <table class="table bordered" id="rideRequests">
+                <thead>
+                <tr class="totals">
+                    <th>Rides taken: <i id="rides_taken"></i></th>
+                </tr>
+                <tr>
+                    <th>Date</th>
+                    <th>Details</th>
+                </tr>
+
+                </thead>
+                <tbody>
+
+                <tr><td><h3>Select rides form the drop-down above</h3></td></tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+        <div class="col-6">
+            <h3 class="title">Available Offers</h3>
+
+            <span id="loginError"></span>
+            <span id="signupSuccess"></span>
+
+            <p id="gif_loader_request"
+               style="display: none; border-radius: 15px; color: green; background: #fefefe; text-align: center;">
+                <img src="../../static/images/loader.gif"/> Loading...
+            </p>
+
+            <div class="totals" style="width: auto; border-radius: 2px; padding: .1em .9em; margin: .2em; float: none">
+                <p>Total rides: <i id="total_rides"></i></p>
+            </div>
+
+            <div id="rideOffersDivs" style="width: auto">
+                <h3>No offers have been made yet</h3>
+            </div>
+
+        </div>
+
+    </div>
+
+    <footer class="footer">
+        <p>&copy; RMW 2018</p>
+    </footer>
+
+</div>
+
+<!-- Details Modal -->
+<div id="myModal" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+
+        <div class="modal-header">
+            <span class="close">&times;</span>
+            <h2>More Details</h2>
+        </div>
+
+        <div class="modal-body">
+
+            <table class="table bordered" style="background: #fff">
+                <tbody>
+                <tr>
+                    <td>Ride ID:</td>
+                    <td id="modal-ride-id"></td>
+                </tr>
+                <tr>
+                    <td>Passenger Name:</td>
+                    <td id="modal-passenger-name"></td>
+                </tr>
+                <tr>
+                    <td>Passenger Contact:</td>
+                    <td id="modal-passenger-contact"></td>
+                </tr>
+                <tr>
+                    <td>Request Date:</td>
+                    <td id="modal-request-date"></td>
+                </tr>
+                <tr>
+                    <td>Trip Status</td>
+                    <td id="modal-trip-status"></td>
+                </tr>
+                <tr>
+                    <td>From:</td>
+                    <td id="modal-trip-from"></td>
+                </tr>
+                <tr>
+                    <td>Destination:</td>
+                    <td id="modal-destination"></td>
+                </tr>
+                <tr>
+                    <td>Cost:</td>
+                    <td id="modal-trip-cost"></td>
+                </tr>
+                <tr>
+                    <td>Departure Date:</td>
+                    <td id="modal-depart-date"></td>
+                </tr>
+                <tr>
+                    <td>Offer Date:</td>
+                    <td id="modal-post-date"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="modal-footer">
+        </div>
+    </div>
+
+</div>
+
+
+<script type="text/javascript" src="../../static/js/main.bundle.js"></script>
+
+</body>
+</html>

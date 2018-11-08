@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Ride my way</title>
+
+    <link href="../../static/css/main.css" rel="stylesheet">
+    <link href="../../static/css/signup.css" rel="stylesheet">
+    <link href="../../static/css/home.css" rel="stylesheet">
+    <link href="../../static/css/modal.css" rel="stylesheet">
+    <link href="../../static/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="../../static/css/grid.css" rel="stylesheet">
+
+</head>
+
+<body>
+<div class="container transparent">
+    <div class="header">
+        <nav>
+            <ul class="navigation put-right">
+                <li style="background-color: dodgerblue" role="presentation"><a href="index.html"><i
+                        class="fa fa-home"></i> Home</a></li>
+                <li style="background-color: dodgerblue" role="presentation"><a href="../about.html"><i
+                        class="fa fa-info"></i> About Us</a></li>
+                <li style="background-color: firebrick" id="logout" role="presentation">
+                    <a href="#"><i class="fa fa-sign-out"></i> Logout</a></li>
+            </ul>
+        </nav>
+        <h3 class="text-muted">Ride My Way (RMW)</h3>
+        <h4 class="text-muted">Manage your rides</h4>
+    </div>
+
+    <div class="one-row">
+
+        <div class="col-3">
+            <h3 class="title">New Ride Offer</h3>
+
+            <span id="loginError"></span>
+            <span id="signupSuccess"></span>
+
+            <form class="form-signin" id="form-add-new-offer" method="get" action="">
+
+                <p id="gif_loader"
+                   style="display: none; border-radius: 15px; color: green; background: #fefefe; text-align: center;">
+                    <img src="../../static/images/loader.gif"/> Processing.. Please wait..
+                </p>
+
+                <label for="inputDestination" class="sm-only">Destination</label>
+                <input type="text" name="inputDestination" id="inputDestination" class="form-control"
+                       placeholder="Destination" required autofocus>
+                <span class="errorSpan"
+                      id="destinationError">This field is required and should be a valid location.</span>
+
+                <label for="inputTripFrom" class="sm-only">From</label>
+                <input type="text" name="inputTripFrom" id="inputTripFrom" class="form-control"
+                       placeholder="From" required autofocus>
+                <span class="errorSpan" id="tripFromError">This field is required and should be a valid location.</span>
+
+                <label for="inputCost" class="sm-only">Cost</label>
+                <input type="number" name="inputCost" id="inputCost" min="0" class="form-control"
+                       placeholder="eg, 24000"
+                       required autofocus>
+                <span class="errorSpan" id="costError">Cost is required and should be a number greater than 0.</span>
+
+                <label for="inputDate" class="sm-only">Departure Date</label>
+                <input type="datetime-local" name="inputDate" id="inputDate" class="form-control"
+                       placeholder="yyyy-mm-dd HH:MM:SS"
+                       required autofocus>
+                <span class="errorSpan" id="departTimeError">provide a valid date format (yyyy-mm-dd HH:MM:SS).</span>
+
+                <button class="button button-p put-right" id="btnAddOffer" type="submit"><i
+                        class="fa fa-plus-circle"></i> Add offer
+                </button>
+            </form>
+
+            <h4>Offer Filters</h4>
+            <hr>
+
+            <form class="form-signin" id="form-search-offer" action="">
+
+                <label for="inputRideLocation" class="sm-only">Location</label>
+
+                <input type="text" name="inputRideLocation" id="inputRideLocation" class="form-control"
+                       placeholder="Search offers by destination" required autofocus>
+                <button class="button button-p put-right" type="submit"><i class="fa fa-search"></i> Search</button>
+            </form>
+
+        </div>
+
+        <div class="col-5">
+            <h3 class="title">Rides given/taken</h3>
+
+            <span id="loginError_2"></span>
+            <span id="signupSuccess_2"></span>
+
+            <p id="gif_loader_delete"
+               style="display: none; border-radius: 15px; color: darkred; background: #fefefe; text-align: center;">
+                <img src="../../static/images/loader.gif"/> Deleting...Wait
+            </p>
+
+            <div class="totals"
+                 style="width: auto; border-radius: 2px; padding: .1em .9em; margin: .2em; float: none">
+                <p style="float:left;">Total rides given: <i id="rides_given"></i></p>
+                <p style="float:right;">Rides taken: <i id="rides_taken"></i></p>
+            </div>
+
+            <div id="rideOffersDivs" style="width: auto">
+                <h3>No offers have been made yet</h3>
+            </div>
+
+        </div>
+
+        <div class="col-4">
+            <h3 class="title">Customer requests</h3>
+
+            <span id="loginError_1"></span>
+            <span id="signupSuccess_1"></span>
+
+            <p id="gif_loader_table"
+               style="display: none; border-radius: 15px; color: green; background: #fefefe; text-align: center;">
+                <img src="../../static/images/loader.gif"/> Loading...
+            </p>
+
+            <label for="rides_list">Select a ride</label>
+            <select name="rides_list" class="form-control" id="rides_list">
+                <option value="0">--------------------</option>
+            </select>
+
+            <table class="table bordered" id="rideRequests">
+                <thead>
+                <tr class="totals-green">
+                    <th>Total passenger requests: <i id="total_requests"></i></th>
+                </tr>
+                <tr>
+                    <th>Client</th>
+                </tr>
+
+                </thead>
+                <tbody>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+    <footer class="footer">
+        <p>&copy; RMW 2018</p>
+    </footer>
+
+</div>
+
+
+<!-- Details Modal -->
+<div id="myModal" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+
+        <div class="modal-header">
+            <span class="close">&times;</span>
+            <h2>More Details</h2>
+        </div>
+
+        <div class="modal-body">
+
+            <table class="table bordered" style="background: #fff">
+                <tbody>
+                <tr>
+                    <td>Ride ID:</td>
+                    <td id="modal-ride-id"></td>
+                </tr>
+                <tr>
+                    <td>Passenger Name:</td>
+                    <td id="modal-passenger-name"></td>
+                </tr>
+                <tr>
+                    <td>Passenger Contact:</td>
+                    <td id="modal-passenger-contact"></td>
+                </tr>
+                <tr>
+                    <td>Request Date:</td>
+                    <td id="modal-request-date"></td>
+                </tr>
+                <tr>
+                    <td>Trip Status</td>
+                    <td id="modal-trip-status"></td>
+                </tr>
+                <tr>
+                    <td>From:</td>
+                    <td id="modal-trip-from"></td>
+                </tr>
+                <tr>
+                    <td>Destination:</td>
+                    <td id="modal-destination"></td>
+                </tr>
+                <tr>
+                    <td>Cost:</td>
+                    <td id="modal-trip-cost">Cost: ~3000 Ush</td>
+                </tr>
+                <tr>
+                    <td>Departure Date:</td>
+                    <td id="modal-depart-date"></td>
+                </tr>
+                <tr>
+                    <td>Offer Date:</td>
+                    <td id="modal-post-date"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="modal-footer">
+        </div>
+    </div>
+
+</div>
+
+<script type="text/javascript" src="../../static/js/main.bundle.js"></script>
+
+</body>
+</html>
+

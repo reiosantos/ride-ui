@@ -1,0 +1,63 @@
+.grid {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.grid > div {
+    flex: 1 1 100px;
+    background: whitesmoke;
+    margin: .2em;
+    padding: .5em;
+    text-align: left;
+
+    #background: rgba(249, 249, 249, 0.68);
+    -webkit-transition: -webkit-transform .15s linear;
+    -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, .25);
+    -moz-box-shadow: 0 3px 6px rgba(0, 0, 0, .25);
+}
+
+.z-depth-3 {
+    -webkit-box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 3px 5px -1px rgba(0, 0, 0, 0.3) !important;
+    box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 3px 5px -1px rgba(0, 0, 0, 0.3) !important;
+}
+
+/*
+.grid > div:nth-child(2n) {
+   background-color: darkolivegreen;
+}
+.grid > div:nth-child(3n) {
+   background-color: coral;
+}
+.grid > div:nth-child(4n) {
+   background-color: firebrick;
+}
+.grid > div:nth-child(5n) {
+   background-color: dodgerblue;
+}*/
+.grid > div:hover {
+    background: dodgerblue;
+    cursor: pointer;
+    color: #ffffff;
+    text-align: center;
+
+    -webkit-transform: scale(1.25);
+    -moz-transform: scale(1.25);
+    position: relative;
+    z-index: 5;
+    -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, .7);
+    -moz-box-shadow: 0 3px 6px rgba(0, 0, 0, .7);
+}
+.grid > div:hover .available {
+    color: #ffffff;
+}
+.grid > div:hover button {
+    text-align: center;
+    float: none;
+    margin: auto;
+}
+.delete_ride{
+    display: flex;
+    flex-wrap: wrap;
+    flex-basis: border-box;
+    margin-top: .5em;
+}

@@ -1,0 +1,35 @@
+{
+  "name": "ride-ui",
+  "version": "1.0.0",
+  "description": "ride ui for a car pooling application",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "babel static/js_src -d static/js",
+    "webpack": "webpack --mode production"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/reiosantos/ride-ui.git"
+  },
+  "keywords": [
+    "ride"
+  ],
+  "author": "reiosantos",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/reiosantos/ride-ui/issues"
+  },
+  "homepage": "https://github.com/reiosantos/ride-ui#readme",
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "webpack": "^4.16.0",
+    "webpack-cli": "^3.0.8"
+  },
+  "dependencies": {
+    "request": "^2.87.0"
+  }
+}
